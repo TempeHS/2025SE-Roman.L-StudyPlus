@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <h1 class="display-1">Dashboard</h1>
+    </div>
+    <div class="row">
+    </div>
+</div>
+
+<!-- Static To-Do List Preview -->
+<div class="container mb-4">
+    <h2>My To-Do List</h2>
+    <form class="d-flex mb-2">
+        <input class="form-control me-2" type="text" placeholder="Add a new to-do..." disabled>
+        <button class="btn btn-primary" type="button" disabled>Add</button>
+    </form>
+    <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <button class="btn btn-sm btn-outline-secondary" disabled>❑</button>
+            <span class="flex-grow-1 ms-2">Finish Flask project</span>
+            <button class="btn btn-sm btn-danger" disabled>🗑</button>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <button class="btn btn-sm btn-success" disabled>✔</button>
+            <span class="flex-grow-1 ms-2 text-decoration-line-through">Read chapter 5</span>
+            <button class="btn btn-sm btn-danger" disabled>🗑</button>
+        </li>
+        <li class="list-group-item text-muted">No to-dos yet!</li>
+    </ul>
+</div>
+
+<script src="{{ url_for('static', filename='js/dashboard.js') }}" nonce="{{ nonce }}"></script>
+{% endblock %}
