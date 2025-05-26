@@ -7,7 +7,7 @@
   content="base-uri 'self'; default-src 'self'; style-src 'self' 'nonce-{{ g.nonce }}'; script-src 'self' 'nonce-{{ g.nonce }}'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self'; object-src 'self'; worker-src 'self'; frame-src 'none'; form-action 'self'; manifest-src 'self'" />
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
-  <title>Study Plus 2025</title>
+  <title>Study Plus</title>
   <link rel="manifest" href="{{ url_for('static', filename='manifest.webmanifest') }}" />
   <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.png') }}" />
   <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" />  

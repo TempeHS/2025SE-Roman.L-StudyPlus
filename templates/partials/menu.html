@@ -40,7 +40,7 @@
               alt="DownloadUser" width="24" height="20" class="icon">Download user
               data</a></li>
           <li>
-            <form action="{{ url_for('user.deleteUser') }}" method="POST" class="deleteUser">
+            <form action="{{ url_for('auth_user.deleteUser') }}" method="POST" class="deleteUser">
               <input type="hidden" name="csrf_token"
                 value="{{ csrf_token() }}" />
               <button type="submit" class="dropdown-item"><img

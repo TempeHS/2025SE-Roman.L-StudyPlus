@@ -2,25 +2,30 @@
 {% block content %}
 <div class="container">
   <div class="row">
-    <h1>Create Developer Log</h1>
+    <h1>Create To-Do</h1>
   </div>
 </div>
 
 <div class="container">
   <div class="row">
-    <form action="{{ url_for('auth.form') }}" method="POST" class="box" id="createLog">
+    <form action="{{ url_for('auth_form.form') }}" method="POST" class="box" id="createLog">
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-      <div class="col-auto">
-        <label for="titleInput" class="form-label">Project</label>
-        <input name="title" type="text" class="form-control" id="titleInput"
-          placeholder="Project Name" required maxlength="64">
+      <div class="col-auto mb-3">
+        <label for="titleInput" class="form-label">Header</label>
+        <input name="title" type="text" class="form-control" id="titleInput" required maxlength="64">
       </div>
-      <div class="col-auto">
+      <div class="col-auto mb-3">
+        <label for="dueDateInput" class="form-label">Due Date</label>
+        <input name="due_date" type="date" class="form-control" id="dueDateInput">
+      </div>
+      <div class="col-auto mb-3">
+        <label for="labelsInput" class="form-label">Labels</label>
+        <input name="labels" type="labels" class="form-control" id="labelsInput">
+      </div>
+      <div class="col-auto mb-3">
         <label for="bodyText" class="form-label">Log Content</label>
-        <textarea class="form-control" name="body" id="bodyText"
-          ></textarea>
+        <textarea class="form-control" name="body" id="bodyText"></textarea>
       </div>
-      <br />
       <div class="col-auto">
         <button type="submit" class="btn btn-primary mb-3">Create Log</button>
       </div>

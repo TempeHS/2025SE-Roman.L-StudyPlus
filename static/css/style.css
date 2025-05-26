@@ -9,6 +9,7 @@ body {
   font-size: 1rem;
 }
 
+/* General Styles */
 .container {
   display: grid;
   grid-template-columns: 100%;
@@ -56,35 +57,6 @@ body {
 .login-title {
   text-align: left;
   margin-bottom: 1.5rem;
-}
-
-/* Developer logs */
-.log-card {
-  margin-bottom: 1rem;
-}
-
-.log-header {
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-}
-
-.log-meta {
-  color: #6c757d;
-  font-size: 0.9rem;
-  margin-left: auto;
-}
-
-.log-content {
-  padding: 1rem;
-  line-height: 1.5;
-}
-
-.log-delete {
-  color: #dc3545;
-  margin-left: 1rem;
 }
 
 /* Fonts */

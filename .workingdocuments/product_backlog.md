@@ -16,12 +16,18 @@
 
 * Feedback section
 
-* Dark mode toggle
+* Better dark mode/theme toggle
 
 * Public profile
+
+* Follows
 
 * Create goal settings and achievements
 
 * Note section for each to-do task
 
 * Replace quill JS
+
+* Add archive to-do section after completion
+
+* Add preview section

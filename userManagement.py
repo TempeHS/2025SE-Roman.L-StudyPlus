@@ -94,79 +94,43 @@ def updateLastActivity(user_id):
     cur.execute("UPDATE users SET lastactivity = ? WHERE id = ?", (datetime.now(), user_id))
     db.commit()
 
-## Devlog related functions
-def mapDevlogRows(data):
-    return [{
-        'id': row[0],
-        'user_id': row[1],
-        'title': row[2],
-        'body': row[3],
-        'date': row[4],
-        'fullname': row[5]
-    } for row in data]
+## To-Do List Functions
 
-def insertDevlog(safe_title: str, safe_body: str, fullname: str, user_id: int, date: str):
+def addTodo(title, body, fullname, user_id, created_at, due_date, label):
     db = get_db()
     cur = db.cursor()
-    cur.execute("INSERT INTO developer_log (title, body, user_id, date, fullname) VALUES (?, ?, ?, ?, ?)",(safe_title, safe_body, user_id, date, fullname))
+    cur.execute(
+        "INSERT INTO todos (title, body, fullname, user_id, created_at, due_date, label) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        (title, body, fullname, user_id, created_at, due_date, label)
+    )
     db.commit()
 
-def deleteLogs(user_id, log_id):
-    try:
-        con = sql.connect(".databaseFiles/database.db")
-        cur = con.cursor()
-        cur.execute("SELECT user_id FROM developer_log WHERE id = ?", (log_id,))
-        log = cur.fetchone()
-        if log and log[0] == user_id:
-            cur.execute("DELETE FROM developer_log WHERE id = ?", (log_id,))
-            con.commit()
-            flash("Log deleted successfully.", "success")
-        else:
-            flash("You do not have permission to delete this log.", "error")
-    except Exception as e:
-        print(f"Error deleting log: {e}")
-        flash("An error occurred while deleting the log.", "error")
-    finally:
-        if con:
-            con.close()
-    return redirect(url_for('dashboard'))
-
-def listDevlogs() -> list:
+def getTodos(user_id):
     db = get_db()
     cur = db.cursor()
-    data = cur.execute("SELECT * FROM developer_log").fetchall()
+    cur.execute("SELECT id, title, due_date, label, body, status FROM todos WHERE user_id = ? ORDER BY date DESC", (user_id,))
+    todos = [
+        {
+            "id": row[0],
+            "title": row[1],
+            "due_date": row[2],
+            "label": row[3],
+            "body": row[4],
+            "completed": row[5]
+        }
+        for row in cur.fetchall()
+    ]    
     db.commit()
-    return mapDevlogRows(data)
+    return todos
 
-## Devlog query functions
-def searchByDeveloper(safe_query):
+def statusTodo(user_id, todo_id):
     db = get_db()
     cur = db.cursor()
-    cur.execute("SELECT * FROM developer_log WHERE fullname LIKE ?", (f'%{safe_query}%',))
-    data = cur.fetchall()
+    cur.execute("UPDATE todos SET status = 1 WHERE id = ? AND user_id = ?", (todo_id, user_id))
     db.commit()
-    return mapDevlogRows(data)
 
-def searchByDate(safe_query):
+def deleteTodo(user_id, todo_id):
     db = get_db()
     cur = db.cursor()
-    cur.execute("SELECT * FROM developer_log WHERE date LIKE ?", (f'%{safe_query}%',))
-    data = cur.fetchall()
+    cur.execute("DELETE FROM todos WHERE id = ? AND user_id = ?", (todo_id, user_id))
     db.commit()
-    return mapDevlogRows(data)
-
-def searchByContent(safe_query):
-    db = get_db()
-    cur = db.cursor()
-    cur.execute("SELECT * FROM developer_log WHERE title LIKE ? OR body LIKE ?", (f'%{safe_query}%', f'%{safe_query}%'))
-    data = cur.fetchall()
-    db.commit()
-    return mapDevlogRows(data)
-
-def searchAll(safe_query):
-    db = get_db()
-    cur = db.cursor()
-    cur.execute("SELECT * FROM developer_log WHERE title LIKE ? OR body LIKE ? OR fullname LIKE ? OR date LIKE ?", (f'%{safe_query}%', f'%{safe_query}%', f'%{safe_query}%', f'%{safe_query}%'))
-    data = cur.fetchall()
-    db.commit()
-    return mapDevlogRows(data)

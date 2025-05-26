@@ -3,7 +3,7 @@ from flask_login import login_required, current_user, logout_user
 from src.config import app_log
 import userManagement as dbHandler
 
-auth_user_bp = Blueprint('user', __name__)
+auth_user_bp = Blueprint('auth_user', __name__)
 
 @auth_user_bp.route('/delete_account', methods=['POST'])
 @login_required

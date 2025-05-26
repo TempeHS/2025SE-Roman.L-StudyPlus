@@ -1,9 +1,6 @@
 # Standard Library Imports
 import os
 import ssl
-import time
-import html
-import random
 from datetime import datetime, timedelta # Date and time
 from urllib.parse import urlparse # URL parsing
 
@@ -13,7 +10,7 @@ from flask_wtf import CSRFProtect
 from flask_csp.csp import csp_header
 from flask_limiter import Limiter # Rate limiter
 from flask_limiter.util import get_remote_address # Rate limiter
-from flask_login import LoginManager, login_user, logout_user, login_required, current_user # Login manager
+from flask_login import LoginManager, logout_user, login_required, current_user # Login manager
 from apscheduler.schedulers.background import BackgroundScheduler
 from dotenv import load_dotenv
 
@@ -139,13 +136,20 @@ app.register_blueprint(auth_user_bp)
 @app.route("/dashboard.html", methods=["GET", "POST"])
 @login_required
 def dashboard():
-    '''
-    Dashboard for logged in users
-    '''
-    checkSessionTimeout()
-    logs = dbHandler.listDevlogs()
-    return render_template('/dashboard.html', logs=logs)
+    todos = dbHandler.getTodos(current_user.id)
+    return render_template("dashboard.html", todos=todos)
 
+@app.route("/delete_todo/<int:todo_id>", methods=["POST"])
+@login_required
+def delete_todo(todo_id):
+    dbHandler.deleteTodo(current_user.id, todo_id)
+    return redirect(url_for("dashboard"))
+
+@app.route("/complete_todo/<int:todo_id>", methods=["POST"])
+@login_required
+def complete_todo(todo_id):
+    dbHandler.statusTodo(current_user.id, todo_id)
+    return redirect(url_for("dashboard"))
 
 @app.route('/logout', methods=['POST'])
 @login_required
