@@ -15,7 +15,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from dotenv import load_dotenv
 
 # Local Application Imports
-from src import sanitize_and_validate as sv, session_state as sst, password_hashing as psh # Custom modules
+from src import session_state as sst # Custom modules
 from src.security import init_security
 
 # auth_routes imports
@@ -90,8 +90,8 @@ def root():
         # Server Side CSP is consistent with meta CSP in layout.html
         "base-uri": "'self'",
         "default-src": "'self'",
-        "style-src": "'self' 'nonce-{{ g.nonce }}'",
-        "script-src": "'self' 'nonce-{{ g.nonce }}'",
+        "style-src": "'self' 'unsafe-inline'",
+        "script-src": "'self' 'unsafe-inline'",
         "img-src": "'self' data:",
         "media-src": "'self'",
         "font-src": "'self'",
@@ -129,14 +129,33 @@ def is_safe_url(target):
     return False
 
 app.register_blueprint(auth_bp)
+
 app.register_blueprint(auth_login_bp)
+
 app.register_blueprint(auth_form_bp)
+
 app.register_blueprint(auth_user_bp)
 
 @app.route("/dashboard.html", methods=["GET", "POST"])
 @login_required
 def dashboard():
     todos = dbHandler.getTodos(current_user.id)
+    for todo in todos:
+        due = todo.get('due_date')
+        if due:
+            # Convert string to datetime if needed
+            if isinstance(due, str):
+                try:
+                    due_dt = datetime.fromisoformat(due)
+                except ValueError:
+                    due_dt = datetime.strptime(due, "%Y-%m-%d %H:%M:%S")
+            else:
+                due_dt = due
+            todo['days_left'] = (due_dt.date() - datetime.now().date()).days
+            todo['due_date_obj'] = due_dt
+        else:
+            todo['days_left'] = None
+            todo['due_date_obj'] = None
     return render_template("dashboard.html", todos=todos)
 
 @app.route("/delete_todo/<int:todo_id>", methods=["POST"])
@@ -160,26 +179,6 @@ def logout():
     logout_user()
     flash("You have been logged out.", "info")
     return redirect('/index.html')
-
-
-@app.route('/search')
-@login_required
-def search():
-    '''
-    Search developer logs for logged in
-    '''
-    query = request.args.get('query', '')
-    safe_query = sv.sanitizeQuery(query)
-    filter_type = request.args.get('filter', 'all')
-    if filter_type == 'developer':
-        logs = dbHandler.searchByDeveloper(safe_query)
-    elif filter_type == 'date':
-        logs = dbHandler.searchByDate(safe_query)
-    elif filter_type == 'content':
-        logs = dbHandler.searchByContent(safe_query)
-    else:
-        logs = dbHandler.searchAll(safe_query)
-    return render_template('dashboard.html', logs=logs)
 
 # Endpoint for logging CSP violations
 @app.route("/csp_report", methods=["POST"])

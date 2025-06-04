@@ -24,10 +24,21 @@
                         <button class="btn btn-sm btn-danger ms-2" type="submit">Delete</button>
                     </form>
                 </div>
-                <div class="small text-secondary mb-1">Due: {{ todo.due_date }}</div>
+                <div class="small text-secondary mb-1">
+                    Due: {{ todo.due_date_obj.strftime('%Y-%m-%d') if todo.due_date_obj else '' }}
+                    {% if todo.days_left is not none %}
+                        {% if todo.days_left > 0 %}
+                            <span class="badge bg-info">{{ todo.days_left }} day{{ 's' if todo.days_left != 1 else '' }} left</span>
+                        {% elif todo.days_left == 0 %}
+                            <span class="badge bg-warning text-dark">Due today</span>
+                        {% else %}
+                            <span class="badge bg-danger">Overdue by {{ -todo.days_left }} day{{ 's' if todo.days_left != -1 else '' }}</span>
+                        {% endif %}
+                    {% endif %}
+                </div>
                 <div class="small text-dark mb-1">Notes: {{ todo.body }}</div>
                 {% if todo.label %}
-                <div class="small text-dark mb-1">Labels: {{ todo.label }}</div>
+                <div class="badge bg-info">{{ todo.label }}</div>
                 {% endif %}
             </li>
             {% else %}
@@ -37,5 +48,27 @@
     </div>
 </div>
 </div>
+
+<div class="row justify-content-center mb-4">
+    <div class="col-12">
+        <div id="todo-network" style="height: 400px; border: 1px solid #ddd;"></div>
+    </div>
+</div>
+
+<script src="https://unpkg.com/vis-network@9.1.2/dist/vis-network.min.js"></script>
+
+<script nonce="{{ nonce }}">
+    window.todos = [
+        {% for todo in todos %}
+        {
+            id: {{ todo.id }},
+            label: "{{ todo.title }}",
+            color: "{{ '#28a745' if todo.completed else '#ffc107' }}"
+        },
+        {% endfor %}
+    ];
+</script>
+
 <script src="{{ url_for('static', filename='js/dashboard.js') }}" nonce="{{ nonce }}"></script>
+<script src="{{ url_for('static', filename='js/todo-network.js') }}" nonce="{{ nonce }}"></script>
 {% endblock %}
