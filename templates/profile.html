@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <h1><img src="/static/icons/user.svg" alt="Icon" width="35" height="35"> {{ current_user.firstname }} {{ current_user.lastname }}</h1>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-6 col-md-4 col-lg-3">
+        <canvas id="taskPieChart" width="200" height="200"></canvas>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js" nonce="{{ nonce }}"></script>
+
+<script nonce="{{ nonce }}">
+    window.completed = {{ completed }};
+    window.ongoing = {{ ongoing }};
+    window.overdue = {{ overdue }};
+</script>
+
+<script src="{{ url_for('static', filename='js/chart-config.js') }}" nonce="{{ nonce }}"></script>
+{% endblock %}

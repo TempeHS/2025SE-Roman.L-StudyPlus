@@ -5,7 +5,7 @@ from datetime import datetime, timedelta # Date and time
 from urllib.parse import urlparse # URL parsing
 
 # Third-Party Imports
-from flask import Flask, redirect, render_template, request, session, url_for, jsonify, flash, g
+from flask import Flask, redirect, render_template, request, session, url_for, flash, g
 from flask_wtf import CSRFProtect
 from flask_csp.csp import csp_header
 from flask_limiter import Limiter # Rate limiter
@@ -23,6 +23,7 @@ from src.auth_routes.signup import auth_bp
 from src.auth_routes.login import auth_login_bp
 from src.auth_routes.form import auth_form_bp
 from src.auth_routes.user import auth_user_bp
+from src.auth_routes.dashboard import auth_dashboard_bp
 
 import userManagement as dbHandler # Database functions
 
@@ -33,6 +34,9 @@ init_security(app)
 
 @app.before_request
 def generate_nonce():
+    '''
+    Bypass CSP headers
+    '''
     g.nonce = os.urandom(16).hex()
 
 # CSRF
@@ -106,13 +110,13 @@ def root():
     }
 )
 
+# Pages
 @sst.logout_required
 def index():
     '''
     Landing page when user is not logged in
     '''
     return render_template("/index.html")
-
 
 @app.route("/privacy.html", methods=["GET"])
 def privacy():
@@ -122,12 +126,16 @@ def privacy():
     return render_template("/privacy.html")
 
 def is_safe_url(target):
+    '''
+    Check if the target URL is safe to redirect to
+    '''
     ALLOWED_URLS = ['/', '/dashboard', '/index.html']
     parsed_url = urlparse(target)
     if parsed_url.netloc == '' and parsed_url.path in ALLOWED_URLS:
         return True
     return False
 
+# Website blueprint
 app.register_blueprint(auth_bp)
 
 app.register_blueprint(auth_login_bp)
@@ -136,39 +144,27 @@ app.register_blueprint(auth_form_bp)
 
 app.register_blueprint(auth_user_bp)
 
-@app.route("/dashboard.html", methods=["GET", "POST"])
+app.register_blueprint(auth_dashboard_bp)
+
+# Other
+@app.route("/profile.html", methods=["GET", "POST"])
 @login_required
-def dashboard():
-    todos = dbHandler.getTodos(current_user.id)
-    for todo in todos:
-        due = todo.get('due_date')
-        if due:
-            # Convert string to datetime if needed
-            if isinstance(due, str):
-                try:
-                    due_dt = datetime.fromisoformat(due)
-                except ValueError:
-                    due_dt = datetime.strptime(due, "%Y-%m-%d %H:%M:%S")
-            else:
-                due_dt = due
-            todo['days_left'] = (due_dt.date() - datetime.now().date()).days
-            todo['due_date_obj'] = due_dt
-        else:
-            todo['days_left'] = None
-            todo['due_date_obj'] = None
-    return render_template("dashboard.html", todos=todos)
+def profile():
+    completed, ongoing, overdue = dbHandler.recordStatus(current_user.id)
+    name = dbHandler.getUserById(current_user.id)
+    return render_template("profile.html", completed=completed, ongoing=ongoing, overdue=overdue)
 
 @app.route("/delete_todo/<int:todo_id>", methods=["POST"])
 @login_required
 def delete_todo(todo_id):
     dbHandler.deleteTodo(current_user.id, todo_id)
-    return redirect(url_for("dashboard"))
+    return redirect(url_for("dashboard.dashboard"))
 
 @app.route("/complete_todo/<int:todo_id>", methods=["POST"])
 @login_required
 def complete_todo(todo_id):
     dbHandler.statusTodo(current_user.id, todo_id)
-    return redirect(url_for("dashboard"))
+    return redirect(url_for("dashboard.dashboard"))
 
 @app.route('/logout', methods=['POST'])
 @login_required
@@ -190,9 +186,8 @@ def csp_report():
     app.logger.critical(request.data.decode())
     return "done"
 
-
 @app.before_request
-def checkSessionTimeout():
+def check_session_timeout():
     '''
     Session timeout check, 30 minutes
     '''

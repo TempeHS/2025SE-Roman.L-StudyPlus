@@ -8,6 +8,8 @@
 
 <div class="container">
   <div class="row">
+    <!-- Form Column -->
+    <div class="col-md-6">
     <form action="{{ url_for('auth_form.form') }}" method="POST" class="box" id="createLog">
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
       <div class="col-auto mb-3">
@@ -23,7 +25,7 @@
         <input name="labels" type="labels" class="form-control" id="labelsInput">
       </div>
       <div class="col-auto mb-3">
-        <label for="bodyText" class="form-label">Log Content</label>
+        <label for="bodyText" class="form-label">Notes</label>
         <textarea class="form-control" name="body" id="bodyText"></textarea>
       </div>
       <div class="col-auto">
@@ -31,7 +33,14 @@
       </div>
     </form>
   </div>
+  <!-- Preview Column -->
+    <div class="col-md-6">
+      <h2>Preview</h2>
+      <div id="logPreview" class="border p-3"></div>
+    </div>
+  </div>
 </div>
-<script nonce="{{ nonce }}" src="/static/tinymce/js/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+
+<script src="{{ url_for('static', filename='js/preview-todo.js') }}" nonce="{{ nonce }}"></script>
 <script src="{{ url_for('static', filename='js/tinymce-init.js') }}" nonce="{{ nonce }}"></script>
 {% endblock %}

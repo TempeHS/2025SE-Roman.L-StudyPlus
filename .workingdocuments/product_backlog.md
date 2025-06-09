@@ -1,8 +1,8 @@
 ## Product Backlog
 
-* Ability to create to-do list
+* ~~Ability to create to-do list~~
 
-* Ability to delete to-do list
+* ~~Ability to delete to-do list~~
 
 * Working heatmap
 
@@ -31,3 +31,7 @@
 * Add archive to-do section after completion
 
 * Add preview section
+
+* Add progression line graph
+
+* ~~Add pie-chart stats~~

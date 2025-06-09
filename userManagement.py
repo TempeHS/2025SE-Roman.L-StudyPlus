@@ -134,3 +134,14 @@ def deleteTodo(user_id, todo_id):
     cur = db.cursor()
     cur.execute("DELETE FROM todos WHERE id = ? AND user_id = ?", (todo_id, user_id))
     db.commit()
+
+def recordStatus(user_id):
+    db = get_db()
+    cur = db.cursor()
+    cur.execute("SELECT completed_task, ongoing_task, overdue_task FROM users WHERE id=?", (user_id,))
+    row = cur.fetchone()
+    db.commit()
+    if row:
+        completed, ongoing, overdue = row
+        return completed, ongoing, overdue
+    return 0, 0, 0

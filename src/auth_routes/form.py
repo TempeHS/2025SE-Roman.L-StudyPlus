@@ -33,5 +33,5 @@ def form():
         current_date = datetime.now().strftime("%Y-%m-%d %H:%M")
         dbHandler.addTodo(safe_title, safe_body, fullname, user_id, current_date, safe_due_date, safe_label)
         app_log.info("New log created by %s: %s", user_id, title)
-        return redirect(url_for('dashboard'))
+        return redirect(url_for('dashboard.dashboard'))
     return render_template("/form.html")
