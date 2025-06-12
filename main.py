@@ -10,22 +10,24 @@ from flask_wtf import CSRFProtect
 from flask_csp.csp import csp_header
 from flask_limiter import Limiter # Rate limiter
 from flask_limiter.util import get_remote_address # Rate limiter
-from flask_login import LoginManager, logout_user, login_required, current_user # Login manager
+from flask_login import LoginManager, logout_user # Login manager
 from apscheduler.schedulers.background import BackgroundScheduler
 from dotenv import load_dotenv
 
 # Local Application Imports
-from src import session_state as sst # Custom modules
+from src import session_state as sst
 from src.security import init_security
 
 # auth_routes imports
-from src.auth_routes.signup import auth_bp
+from src.auth_routes.signup import auth_signup_bp
 from src.auth_routes.login import auth_login_bp
 from src.auth_routes.form import auth_form_bp
 from src.auth_routes.user import auth_user_bp
 from src.auth_routes.dashboard import auth_dashboard_bp
+from src.auth_routes.profile import auth_profile_bp
 
-import userManagement as dbHandler # Database functions
+# Database functions
+import userManagement as dbHandler
 
 load_dotenv()
 
@@ -62,6 +64,7 @@ limiter = Limiter(
     storage_uri="memory://",
 )
 
+# Rate limit exceeded handler
 @app.errorhandler(429)
 def ratelimit_handler(e):
     flash("Rate limit exceeded. Please try again later.", "error")
@@ -129,52 +132,19 @@ def is_safe_url(target):
     '''
     Check if the target URL is safe to redirect to
     '''
-    ALLOWED_URLS = ['/', '/dashboard', '/index.html']
+    allowed_urls = ['/', '/dashboard', '/index.html']
     parsed_url = urlparse(target)
-    if parsed_url.netloc == '' and parsed_url.path in ALLOWED_URLS:
+    if parsed_url.netloc == '' and parsed_url.path in allowed_urls:
         return True
     return False
 
 # Website blueprint
-app.register_blueprint(auth_bp)
-
+app.register_blueprint(auth_signup_bp)
 app.register_blueprint(auth_login_bp)
-
 app.register_blueprint(auth_form_bp)
-
 app.register_blueprint(auth_user_bp)
-
 app.register_blueprint(auth_dashboard_bp)
-
-# Other
-@app.route("/profile.html", methods=["GET", "POST"])
-@login_required
-def profile():
-    completed, ongoing, overdue = dbHandler.recordStatus(current_user.id)
-    name = dbHandler.getUserById(current_user.id)
-    return render_template("profile.html", completed=completed, ongoing=ongoing, overdue=overdue)
-
-@app.route("/delete_todo/<int:todo_id>", methods=["POST"])
-@login_required
-def delete_todo(todo_id):
-    dbHandler.deleteTodo(current_user.id, todo_id)
-    return redirect(url_for("dashboard.dashboard"))
-
-@app.route("/complete_todo/<int:todo_id>", methods=["POST"])
-@login_required
-def complete_todo(todo_id):
-    dbHandler.statusTodo(current_user.id, todo_id)
-    return redirect(url_for("dashboard.dashboard"))
-
-@app.route('/logout', methods=['POST'])
-@login_required
-def logout():
-    '''
-    Logout for logged in
-    '''
-    logout_user()
-    flash("You have been logged out.", "info")
-    return redirect('/index.html')
+app.register_blueprint(auth_profile_bp)
 
 # Endpoint for logging CSP violations
 @app.route("/csp_report", methods=["POST"])

@@ -36,7 +36,7 @@ def login():
             time.sleep(random.uniform(0.1, 0.2))
             app_log.info("Successful login: %s", email)
             dbHandler.updateLastActivity(user[0])
-            return render_template("/dashboard.html")
+            return redirect("/dashboard.dashboard")
 
         time.sleep(random.uniform(0.1, 0.2))
         app_log.warning("Failed login attempt: %s | %s | %s", email, request.remote_addr, datetime.now())

@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand d-flex align-items-center" href="/dashboard.html">
-      <img src="{{ url_for('static', filename='images/logo.png') }}" 
+      <img src="{{ url_for('static', filename='images/favicon.png') }}" 
         alt="Icon" width="24" height="24"></a>  
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
       data-bs-target="#navbarSupportedContent"
@@ -12,6 +12,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <!-- Home -->
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/index.html"><img
               src="{{ url_for('static', filename='icons/home.svg') }}"
@@ -20,6 +21,7 @@
         <li class="nav-item">
         </li>
       </li>
+      <!-- Create Task -->
       <li class="nav-item">
         <a class="nav-link" href="/form.html"><img
             src="{{ url_for('static', filename='icons/plus-square.svg') }}"
@@ -28,25 +30,30 @@
         <li class="nav-item">
         </li>
       </li>
+      <!-- Profile -->
       <li class="nav-item">
         <a class="nav-link" href="/profile.html"><img
             src="{{ url_for('static', filename='icons/user.svg') }}"
             alt="Profile" width="24" height="20" class="icon">Profile</a>
       </li>
+      <!-- Settings -->
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" role="button"
           data-bs-toggle="dropdown" aria-expanded="false">
           <img src="{{ url_for('static', filename='icons/settings.svg') }}"
             alt="Settings" width="24" height="20" class="icon">Settings</a>
+        <!-- Two-step verification -->
         <ul class="dropdown-menu">
           <li><a class="dropdown-item disabled" href="#"><img
             src="{{ url_for('static', filename='icons/server.svg') }}"
-            alt="DeleteUser" width="24" height="20" class="icon">Two-step verification</a></li>
+            alt="2FA" width="24" height="20" class="icon">Two-step verification</a></li>
+            <!-- Download Data -->
           <li><a class="dropdown-item"
               href="/download_data?user_id={{ current_user.id }}"><img
               src="{{ url_for('static', filename='icons/user.svg') }}"
               alt="DownloadUser" width="24" height="20" class="icon">Download user
               data</a></li>
+              <!-- Delete User -->
           <li>
             <form action="{{ url_for('auth_user.deleteUser') }}" method="POST" class="deleteUser">
               <input type="hidden" name="csrf_token"
@@ -60,6 +67,7 @@
           <li>
             <hr class="dropdown-divider" />
           </li>
+          <!-- Logout -->
           <li>
             <form action="/logout" method="POST" class="logout">
               <input type="hidden" name="csrf_token"

@@ -34,13 +34,13 @@
     </form>
   </div>
   <!-- Preview Column -->
-    <div class="col-md-6">
-      <h2>Preview</h2>
+      <div class="col-md 6">
+        <label for="titleInput" class="form-label">Preview</label>
       <div id="logPreview" class="border p-3"></div>
     </div>
   </div>
 </div>
 
-<script src="{{ url_for('static', filename='js/preview-todo.js') }}" nonce="{{ nonce }}"></script>
+<script src="{{ url_for('static', filename='js/todo-preview.js') }}" nonce="{{ nonce }}"></script>
 <script src="{{ url_for('static', filename='js/tinymce-init.js') }}" nonce="{{ nonce }}"></script>
 {% endblock %}

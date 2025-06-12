@@ -4,9 +4,9 @@ from src import sanitize_and_validate as sv, password_hashing as psh
 import userManagement as dbHandler
 from userManagement import User
 
-auth_bp = Blueprint('auth', __name__)
+auth_signup_bp = Blueprint('auth', __name__)
 
-@auth_bp.route("/signup.html", methods=["GET", "POST"])
+@auth_signup_bp.route("/signup.html", methods=["GET", "POST"])
 def signup():
     if request.method == "POST":
         email = request.form["email"]

@@ -5,10 +5,10 @@ function updatePreview() {
     const labels = document.getElementById('labelsInput')?.value || '';
     const body = document.getElementById('bodyText')?.value || '';
     document.getElementById('logPreview').innerHTML = `
-        <h4>${title || '(No Title)'}</h4>
-        <p><strong>Due:</strong> ${due || ''}</p>
-        <p><strong>Labels:</strong> ${labels || ''}</p>
-        <p><strong>Notes:</strong> ${body || ''}</p>
+        <h4>${title || ''}</h4>
+        <p><strong></strong> ${due || ''}</p>
+        <p><strong></strong> ${labels || ''}</p>
+        <p><strong></strong> ${body || ''}</p>
     `;
 }
 ['titleInput', 'dueDateInput', 'labelsInput', 'bodyText'].forEach(id => {

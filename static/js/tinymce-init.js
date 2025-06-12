@@ -6,8 +6,7 @@ function validateForm() {
     }
     return true;
 }
-// (CSP Violation)
-// TinyMCE currently requires the unsafe-inline value in the style-src directive to present content other than plain-text. (https://www.tiny.cloud/docs/tinymce/latest/tinymce-and-csp/)
+// CSP Violation (https://www.tiny.cloud/docs/tinymce/latest/tinymce-and-csp/)
     tinymce.init({
         selector: '#bodyText',
         license_key: 'gpl',
