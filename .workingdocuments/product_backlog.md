@@ -36,4 +36,8 @@
 
 * ~~Create note network~~
 
-* Complete small loading animation
+* ~~Complete small loading animation~~
+
+* Create team list
+
+* 2 Factor Authentication
