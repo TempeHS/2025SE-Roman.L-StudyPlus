@@ -95,7 +95,6 @@ def updateLastActivity(user_id):
     db.commit()
 
 ## To-Do List Functions
-
 def addTodo(title, body, fullname, user_id, created_at, due_date, label):
     db = get_db()
     cur = db.cursor()
@@ -127,7 +126,12 @@ def statusTodo(user_id, todo_id):
     db = get_db()
     cur = db.cursor()
     cur.execute("UPDATE todos SET status = 1 WHERE id = ? AND user_id = ?", (todo_id, user_id))
-    db.commit()
+    row = cur.fetchone()
+    if row is not None:
+        status = row[0]
+        new_status = 0 if status else 1
+        cur.execute("UPDATE todos SET status = ? WHERE id = ? AND user_id = ?", (new_status, todo_id, user_id))
+        db.commit()
 
 def deleteTodo(user_id, todo_id):
     db = get_db()
