@@ -20,7 +20,7 @@ def deleteUser():
     except Exception as e:
         app_log.error("Failed account deletion attempt %s: %s", user_id, str(e))
         flash("An error occurred while trying to delete your account. Please try again.", "error")
-    return redirect(url_for('dashboard'))
+    return redirect(url_for('auth_dashboard'))
 
 @auth_user_bp.route('/download_data', methods=['GET'])
 @login_required

@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 from datetime import datetime
 import userManagement as dbHandler
 
-auth_dashboard_bp = Blueprint('dashboard', __name__)
+auth_dashboard_bp = Blueprint('auth_dashboard', __name__)
 
 @auth_dashboard_bp.route("/dashboard.html", methods=["GET", "POST"])
 @login_required
@@ -24,4 +24,4 @@ def dashboard():
         else:
             todo['days_left'] = None
             todo['due_date_obj'] = None
-    return render_template("dashboard.html", todos=todos)
+    return render_template("dashboard.html", todos=todos, now=datetime.now())

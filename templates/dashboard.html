@@ -1,63 +1,43 @@
 {% extends 'layout.html' %}
 {% block content %}
+{% import 'macros/todo_item.html' as todo_macros %}
+
 <div class="container mt-4">
     <div class="row">
-        <!-- To-do List: 8 columns -->
         <div class="col-lg-8 mb-4">
-            <ul class="list-group">
-                {% for todo in todos %}
-                <li class="list-group-item">
-                    <div class="d-flex align-items-center mb-1">
-                        <form method="POST" action="{{ url_for('profile.complete_todo', todo_id=todo.id) }}"
-                            style="display:inline;">
-                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                            <button
-                                class="btn btn-sm {% if todo.completed %}btn-success{% else %}btn-outline-secondary{% endif %} me-2"
-                                type="submit">
-                                {% if todo.completed %}✔{% else %}❑{% endif %}
-                            </button>
-                        </form>
-                        <span
-                            class="flex-grow-1 {% if todo.completed %}text-decoration-line-through text-muted{% endif %}">
-                            <strong>{{ todo.title }}</strong>
-                        </span>
-                        <form method="POST" action="{{ url_for('profile.delete_todo', todo_id=todo.id) }}"
-                            style="display:inline;">
-                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                            <button class="btn btn-sm btn-danger ms-2" type="submit">Delete</button>
-                        </form>
-                    </div>
-                    <div class="small text-secondary mb-1">
-                        Due: {{ todo.due_date_obj.strftime('%Y-%m-%d') if todo.due_date_obj else '' }}
-                        {% if todo.days_left is not none %}
-                        {% if todo.days_left > 0 %}
-                        <span class="badge bg-info">{{ todo.days_left }} day{{ 's' if todo.days_left != 1 else '' }}
-                            left</span>
-                        {% elif todo.days_left == 0 %}
-                        <span class="badge bg-warning text-dark">Due today</span>
-                        {% else %}
-                        <span class="badge bg-danger">Overdue by {{ -todo.days_left }} day{{ 's' if todo.days_left != -1
-                            else '' }}</span>
-                        {% endif %}
-                        {% endif %}
-                    </div>
-                    <div class="small text-dark mb-1">Notes: {{ todo.body }}</div>
-                    {% if todo.label %}
-                    <div class="badge bg-secondary">{{ todo.label }}</div>
-                    {% endif %}
-                </li>
+            <h4>Ongoing</h4>
+            <ul class="list-group mb-4">
+                {% for todo in todos if not todo.completed and (not todo.due_date_obj or todo.due_date_obj >= now) %}
+                    {{ todo_macros.render_todo(todo) }}
                 {% else %}
-                <li class="list-group-item text-muted">No to-dos yet!</li>
+                    <li class="list-group-item text-muted">No ongoing tasks!</li>
+                {% endfor %}
+            </ul>
+            <h4>Overdue</h4>
+            <ul class="list-group mb-4">
+                {% for todo in todos if not todo.completed and todo.due_date_obj and todo.due_date_obj < now %}
+                    {{ todo_macros.render_todo(todo) }}
+                {% else %}
+                    <li class="list-group-item text-muted">No overdue tasks!</li>
+                {% endfor %}
+            </ul>
+            <h4>Completed</h4>
+            <ul class="list-group mb-4">
+                {% for todo in todos if todo.completed %}
+                    {{ todo_macros.render_todo(todo) }}
+                {% else %}
+                    <li class="list-group-item text-muted">No completed tasks!</li>
                 {% endfor %}
             </ul>
         </div>
 
-        <!-- Node Network -->
-        <div class="col-lg-4 mb-4">
-            <div id="todo-network" style="height: 400px; border: 1px solid #ddd;"></div>
-        </div>
+<!-- Node Network -->
+<div class="col-lg-4 mb-4">
+        <div id="todo-network" style="height: 400px; border: 1px solid #ddd;"></div>
     </div>
 </div>
+</div>
+
 
 <script src="https://unpkg.com/vis-network@9.1.2/dist/vis-network.min.js"></script>
 

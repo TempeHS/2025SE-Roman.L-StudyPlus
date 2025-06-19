@@ -32,6 +32,6 @@ def form():
         fullname = f"{user.firstname} {user.lastname}"
         current_date = datetime.now().strftime("%Y-%m-%d %H:%M")
         dbHandler.addTodo(safe_title, safe_body, fullname, user_id, current_date, safe_due_date, safe_label)
-        app_log.info("New log created by %s: %s", user_id, title)
-        return redirect(url_for('dashboard.dashboard'))
+        app_log.info("New to-do created by %s: %s", user_id, title)
+        return redirect(url_for('auth_dashboard.dashboard'))
     return render_template("/form.html")

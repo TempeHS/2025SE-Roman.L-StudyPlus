@@ -1,8 +1,10 @@
 from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import login_required, logout_user, current_user
+from src.config import app_log
+
 import userManagement as dbHandler
 
-auth_profile_bp = Blueprint('profile', __name__)
+auth_profile_bp = Blueprint('auth_profile', __name__)
 
 @auth_profile_bp.route("/profile.html", methods=["GET", "POST"])
 @login_required
@@ -11,6 +13,7 @@ def profile():
     # name = dbHandler.getUserById(current_user.id)
     return render_template("profile.html", completed=completed, ongoing=ongoing, overdue=overdue)
 
+@auth_profile_bp.route("/delete_todo/<int:todo_id>", methods=["POST"])
 def delete_todo(todo_id):
     '''
     Delete a to-do from the database
@@ -22,7 +25,7 @@ def delete_todo(todo_id):
     except Exception as e:
         app_log.error("Failed todo deletion attempt user_id=%s, todo_id=%s: %s", user_id, todo_id, str(e))
         flash("An error occurred while trying to delete your to-do. Please try again.", "error")
-    return redirect(url_for("dashboard.dashboard"))
+    return redirect(url_for("auth_dashboard.dashboard"))
 
 #
 #@auth_user_bp.route('/delete_log', methods=['POST'])
@@ -45,7 +48,7 @@ def delete_todo(todo_id):
 @login_required
 def complete_todo(todo_id):
     dbHandler.statusTodo(current_user.id, todo_id)
-    return redirect(url_for("dashboard.dashboard"))
+    return redirect(url_for("auth_dashboard.dashboard"))
 
 @auth_profile_bp.route('/logout', methods=['POST'])
 @login_required
