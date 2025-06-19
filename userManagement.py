@@ -99,8 +99,8 @@ def addTodo(title, body, fullname, user_id, created_at, due_date, label):
     db = get_db()
     cur = db.cursor()
     cur.execute(
-        "INSERT INTO todos (title, body, fullname, user_id, created_at, due_date, label) VALUES (?, ?, ?, ?, ?, ?, ?)",
-        (title, body, fullname, user_id, created_at, due_date, label)
+        "INSERT INTO todos (title, body, fullname, user_id, created_at, due_date, label, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+        (title, body, fullname, user_id, created_at, due_date, label, 0)
     )
     db.commit()
 
@@ -125,11 +125,13 @@ def getTodos(user_id):
 def statusTodo(user_id, todo_id):
     db = get_db()
     cur = db.cursor()
-    cur.execute("UPDATE todos SET status = 1 WHERE id = ? AND user_id = ?", (todo_id, user_id))
+    # Get current status
+    cur.execute("SELECT status FROM todos WHERE id = ? AND user_id = ?", (todo_id, user_id))
     row = cur.fetchone()
     if row is not None:
         status = row[0]
-        new_status = 0 if status else 1
+        # Toggle: if already complete (1), set to 0; else set to 1
+        new_status = 0 if status == 1 else 1
         cur.execute("UPDATE todos SET status = ? WHERE id = ? AND user_id = ?", (new_status, todo_id, user_id))
         db.commit()
 
@@ -139,13 +141,37 @@ def deleteTodo(user_id, todo_id):
     cur.execute("DELETE FROM todos WHERE id = ? AND user_id = ?", (todo_id, user_id))
     db.commit()
 
-def recordStatus(user_id):
+def completeStatus(user_id):
     db = get_db()
     cur = db.cursor()
+    # Increment completed_task by 1
+    cur.execute("UPDATE users SET completed_task = completed_task + 1 WHERE id = ?", (user_id,))
+    db.commit()
+    # Fetch and return the updated stats
     cur.execute("SELECT completed_task, ongoing_task, overdue_task FROM users WHERE id=?", (user_id,))
     row = cur.fetchone()
-    db.commit()
     if row:
         completed, ongoing, overdue = row
         return completed, ongoing, overdue
     return 0, 0, 0
+
+def recordStatus(user_id):
+    db = get_db()
+    cur = db.cursor()
+    # Completed
+    cur.execute("SELECT COUNT(*) FROM todos WHERE user_id = ? AND status = 1", (user_id,))
+    completed = cur.fetchone()[0]
+    # Ongoing
+    cur.execute("SELECT COUNT(*) FROM todos WHERE user_id = ? AND status = 0 AND due_date >= ?", (user_id, datetime.now()))
+    ongoing = cur.fetchone()[0]
+    # Overdue
+    cur.execute("SELECT COUNT(*) FROM todos WHERE user_id = ? AND status = 0 AND due_date < ?", (user_id, datetime.now()))
+    overdue = cur.fetchone()[0]
+
+    cur.execute(
+        "UPDATE users SET completed_task = ?, ongoing_task = ?, overdue_task = ? WHERE id = ?",
+        (completed, ongoing, overdue, user_id)
+    )
+    db.commit()
+
+    return completed, ongoing, overdue

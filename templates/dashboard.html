@@ -65,12 +65,12 @@
 <script nonce="{{ nonce }}">
     window.todos = [
         {% for todo in todos %}
-    {
-        id: { { todo.id } },
-        label: "{{ todo.title }}",
+        {
+            id: {{ todo.id }},
+            label: "{{ todo.title }}",
             color: "{{ '#28a745' if todo.completed else '#ffc107' }}"
-    },
-    {% endfor %}
+        },
+        {% endfor %}
     ];
 </script>
 

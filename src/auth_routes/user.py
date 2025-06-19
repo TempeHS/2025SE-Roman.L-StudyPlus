@@ -22,22 +22,6 @@ def deleteUser():
         flash("An error occurred while trying to delete your account. Please try again.", "error")
     return redirect(url_for('dashboard'))
 
-@auth_user_bp.route('/delete_log', methods=['POST'])
-@login_required
-def deleteLog():
-    '''
-    Delete log from database
-    '''
-    user_id = current_user.id
-    log_id = request.form.get('log_id')
-    try:
-        dbHandler.deleteLogs(user_id, log_id)
-        app_log.info("Successful log deletion: %s: %s", user_id, log_id)
-    except Exception as e:
-        app_log.error("Failed log deletion attempt %s: %s", user_id, str(e))
-        flash("An error occurred while trying to delete your log. Please try again.", "error")
-    return redirect(url_for('dashboard'))
-
 @auth_user_bp.route('/download_data', methods=['GET'])
 @login_required
 def downloadUser():
