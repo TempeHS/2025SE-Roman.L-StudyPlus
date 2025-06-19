@@ -141,20 +141,6 @@ def deleteTodo(user_id, todo_id):
     cur.execute("DELETE FROM todos WHERE id = ? AND user_id = ?", (todo_id, user_id))
     db.commit()
 
-def completeStatus(user_id):
-    db = get_db()
-    cur = db.cursor()
-    # Increment completed_task by 1
-    cur.execute("UPDATE users SET completed_task = completed_task + 1 WHERE id = ?", (user_id,))
-    db.commit()
-    # Fetch and return the updated stats
-    cur.execute("SELECT completed_task, ongoing_task, overdue_task FROM users WHERE id=?", (user_id,))
-    row = cur.fetchone()
-    if row:
-        completed, ongoing, overdue = row
-        return completed, ongoing, overdue
-    return 0, 0, 0
-
 def recordStatus(user_id):
     db = get_db()
     cur = db.cursor()

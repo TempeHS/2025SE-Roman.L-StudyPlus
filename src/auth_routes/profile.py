@@ -45,7 +45,6 @@ def delete_todo(todo_id):
 @login_required
 def complete_todo(todo_id):
     dbHandler.statusTodo(current_user.id, todo_id)
-    dbHandler.completeStatus(current_user.id)
     return redirect(url_for("dashboard.dashboard"))
 
 @auth_profile_bp.route('/logout', methods=['POST'])
