@@ -21,14 +21,22 @@
                     <li class="list-group-item text-muted">No overdue tasks!</li>
                 {% endfor %}
             </ul>
-            <h4>Completed</h4>
-            <ul class="list-group mb-4">
-                {% for todo in todos if todo.completed %}
-                    {{ todo_macros.render_todo(todo) }}
-                {% else %}
-                    <li class="list-group-item text-muted">No completed tasks!</li>
-                {% endfor %}
-            </ul>
+            <h4>
+                <span>Completed</span>
+                <button class="btn btn-sm btn-link p-0 ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#completedCollapse" aria-expanded="false" aria-controls="completedCollapse" style="vertical-align: baseline;">
+                    <span class="bi bi-chevron-down"></span>
+                    Toggle
+                </button>
+            </h4>
+            <div class="collapse" id="completedCollapse">
+                <ul class="list-group mb-4">
+                    {% for todo in todos if todo.completed %}
+                        {{ todo_macros.render_todo(todo) }}
+                    {% else %}
+                        <li class="list-group-item text-muted">No completed tasks!</li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
 
 <!-- Node Network -->
