@@ -52,7 +52,7 @@
                         </a>
                     </li>
                     <li>
-                        <form action="{{ url_for('auth_user.deleteUser') }}" method="POST" class="deleteUser m-0">
+                        <form action="{{ url_for('auth_user.deleteUser') }}" method="POST" class="deleteUser">
                             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                             <button type="submit" class="nav-link text-danger">
                                 <img src="{{ url_for('static', filename='icons/user-minus.svg') }}" alt="DeleteUser"
@@ -64,7 +64,7 @@
                         <hr class="dropdown-divider" />
                     </li>
                     <li>
-                        <form action="/logout" method="POST" class="logout m-0">
+                        <form action="/logout" method="POST" class="Logout">
                             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                             <button type="submit" class="nav-link text-danger">
                                 <img src="{{ url_for('static', filename='icons/log-out.svg') }}" alt="Logout" width="24"
@@ -78,4 +78,5 @@
     </ul>
     <hr>
 </div>
+<script src="{{ url_for('static', filename='js/menu.js') }}" nonce="{{ nonce }}"></script>
 {% endif %}

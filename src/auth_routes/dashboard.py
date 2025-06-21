@@ -51,4 +51,4 @@ def search_todos():
     else:
         todos = dbHandler.searchTodosAll(current_user.id, safe_query)
     todos = days_left(todos)
-    return render_template('dashboard.html', todos=todos)
+    return render_template('dashboard.html', todos=todos, now=datetime.now())

@@ -10,7 +10,7 @@
         <span class="flex-grow-1 {% if todo.completed %}text-decoration-line-through text-muted{% endif %}">
             <strong>{{ todo.title }}</strong>
         </span>
-        <form method="POST" action="{{ url_for('auth_profile.delete_todo', todo_id=todo.id) }}" style="display:inline;">
+        <form method="POST" action="{{ url_for('auth_profile.delete_todo', todo_id=todo.id) }}" style="display:inline;" class="delete-todo-form">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
             <button class="btn btn-sm btn-danger ms-2" type="submit">Delete</button>
         </form>
@@ -27,9 +27,11 @@
             {% endif %}
         {% endif %}
     </div>
-    <div class="small text-dark mb-1">{{ todo.body }}</div>
+    <div class="small text-dark mb-1">{{ todo.body | safe }}</div>
     {% if todo.label %}
         <div class="badge bg-secondary">{{ todo.label }}</div>
     {% endif %}
 </li>
+
+<script src="{{ url_for('static', filename='js/dashboard.js') }}" nonce="{{ nonce }}"></script>
 {% endmacro %}

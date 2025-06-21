@@ -31,7 +31,7 @@ def login():
 
         user = dbHandler.retrieveUsers(email)
         if user and psh.verifyPassword(password, user[2]):
-            user_obj = User(user[0], user[1], user[3], user[4])
+            user_obj = User(user[0], user[1], user[3], user[4], user[5])
             login_user(user_obj)
             time.sleep(random.uniform(0.1, 0.2))
             app_log.info("Successful login: %s", email)

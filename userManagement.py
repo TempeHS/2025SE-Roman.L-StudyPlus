@@ -53,7 +53,7 @@ def retrieveUsers(email: str) -> tuple:
     time.sleep(random.uniform(0.1, 0.2))
     db = get_db()
     cur = db.cursor()
-    cur.execute("SELECT id, email, password, firstname, lastname FROM users WHERE email = ?", (email,))
+    cur.execute("SELECT id, email, password, firstname, lastname, layout FROM users WHERE email = ?", (email,))
     user = cur.fetchone()
     db.commit()
     return user if user else False

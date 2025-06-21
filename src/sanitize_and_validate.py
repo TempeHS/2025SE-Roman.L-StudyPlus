@@ -1,3 +1,4 @@
+from datetime import datetime
 import html
 import re
 import bleach
@@ -36,12 +37,19 @@ def validateName(firstname, lastname):
         return False
     return True
 
-def validateLog(title, body):
+def validateLog(title, body, due_date, label):
     if not isinstance(title, str):
         return False
     if len(title) > 64:
         return False
-    if len(body) > 2048:
+    if len(body) > 64:
+        return False
+    if due_date is not None:
+        try:
+            datetime.strptime(due_date, '%Y-%m-%d')
+        except (ValueError, TypeError):
+            return False
+    if len(label) > 64:
         return False
     return True
 
