@@ -1,20 +1,20 @@
 # Agile Artifacts
 
-## Sprint backlog list of achievables (annotate changes made during sprint, including data required)
-
-- Working heatmap
+## Sprint backlog list of achievables (annotate changes made during sprint, including data required) (removed 2FA and heatmap, added sidebar)
 
 - ~~Homepage reminders~~
 
 - Create team list
 
-- 2 Factor Authentication
+- Sidebar
 
 ## Increment (what must be achieved by the end of the sprint)
 
 - Ability to collaborate with others
 
 - ~~Ability to review progression~~
+
+- Configurable navbar
 
 ## Sprint Review (Focus on project management)
 

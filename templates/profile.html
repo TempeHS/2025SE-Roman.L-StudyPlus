@@ -6,6 +6,7 @@
     </div>
 </div>
 
+<!-- Statistics -->
 <div class="row justify-content-center">
     <div class="col-12 col-md-6 col-lg-6 mb-4 d-flex justify-content-center">
         <canvas id="taskProgressionChart" width="800" height="350"></canvas>
@@ -17,7 +18,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js" nonce="{{ nonce }}"></script>
 
-<!-- Jinga2 code -->
+<!-- Pie chart -->
 <script nonce="{{ nonce }}">
     window.completed = {{ completed }};
     window.ongoing = {{ ongoing }};

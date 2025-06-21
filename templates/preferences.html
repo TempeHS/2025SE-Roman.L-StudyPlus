@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <h2>Preferences</h2>
+    </div>
+
+<form method="POST" action="{{ url_for('auth_profile.set_layout') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+    <label for="layout">Choose layout:</label>
+    <select name="layout" id="layout" class="form-select">
+        <option value="sidebar" {% if current_user.layout == 'sidebar' %}selected{% endif %}>Sidebar</option>
+        <option value="topbar" {% if current_user.layout == 'topbar' %}selected{% endif %}>Topbar</option>
+    </select>
+    <button type="submit" class="btn btn-primary mt-2">Save</button>
+</form>
+
+<form method="POST" action="{{ url_for('auth_profile.set_theme') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+    <label for="layout">Choose theme:</label>
+    <select name="layout" id="layout" class="form-select">
+        <option value="sidebar" {% if current_user.theme == 'light' %}selected{% endif %}>Light</option>
+        <option value="topbar" {% if current_user.theme == 'dark' %}selected{% endif %}>Dark</option>
+    </select>
+    <button type="submit" class="btn btn-primary mt-2">Save</button>
+</form>
+
+{% endblock %}

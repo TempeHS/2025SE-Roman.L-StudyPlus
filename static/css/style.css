@@ -3,17 +3,26 @@
   padding: 0;
   box-sizing: border-box;
 }
-body {
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  background: #fdfdfd;
-  font-family: "Nunito", sans-serif;
-  font-size: 1rem;
-}
+
 
 body.fade-in {
     opacity: 1;
 }
+
+/* Dark mode */
+:root {
+  --main-bg: #fff;
+  --main-text: #222;
+}
+.theme-dark {
+  --main-bg: #181818;
+  --main-text: #f1f1f1;
+}
+body {
+  background: var(--main-bg);
+  color: var(--main-text);
+}
+
 
 /* General Styles */
 .container {

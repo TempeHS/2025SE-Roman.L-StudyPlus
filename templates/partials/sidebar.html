@@ -1,0 +1,81 @@
+{% if current_user.is_authenticated %}
+<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 250px; min-height: 100vh;">
+    <a href="/dashboard.html" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+        <img src="{{ url_for('static', filename='images/favicon.png') }}" alt="Icon" width="32" height="32"
+            class="me-2">
+        <span class="fs-4">study plus</span>
+    </a>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
+            <a href="/index.html" class="nav-link link-dark" aria-current="page">
+                <img src="{{ url_for('static', filename='icons/home.svg') }}" alt="Home" width="24" height="20"
+                    class="icon me-2">Home
+            </a>
+        </li>
+        <li>
+            <a href="/form.html" class="nav-link link-dark">
+                <img src="{{ url_for('static', filename='icons/plus-square.svg') }}" alt="Create" width="24" height="20"
+                    class="icon me-2">Create
+            </a>
+        </li>
+        <li>
+            <a href="/profile.html" class="nav-link link-dark">
+                <img src="{{ url_for('static', filename='icons/user.svg') }}" alt="Profile" width="24" height="20"
+                    class="icon me-2">Profile
+            </a>
+        </li>
+        <li>
+            <a class="nav-link link-dark" data-bs-toggle="collapse" href="#sidebarSettings" role="button"
+                aria-expanded="false" aria-controls="sidebarSettings">
+                <img src="{{ url_for('static', filename='icons/settings.svg') }}" alt="Settings" width="24" height="20"
+                    class="icon me-2">Settings
+            </a>
+            <div class="collapse" id="sidebarSettings">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li>
+                        <a class="nav-link disabled">
+                            <img src="{{ url_for('static', filename='icons/server.svg') }}" alt="2FA" width="24"
+                                height="20" class="icon me-2">Two-step verification
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="/download_data?user_id={{ current_user.id }}">
+                            <img src="{{ url_for('static', filename='icons/user.svg') }}" alt="DownloadUser" width="24"
+                                height="20" class="icon me-2">Download user data
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/preferences.html" class="nav-link">
+                            <img src="{{ url_for('static', filename='icons/user.svg') }}" alt="Preferences" width="24"
+                                height="20" class="icon me-2">Preferences
+                        </a>
+                    </li>
+                    <li>
+                        <form action="{{ url_for('auth_user.deleteUser') }}" method="POST" class="deleteUser m-0">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                            <button type="submit" class="nav-link text-danger">
+                                <img src="{{ url_for('static', filename='icons/user-minus.svg') }}" alt="DeleteUser"
+                                    width="24" height="20" class="icon me-2">Delete account
+                            </button>
+                        </form>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider" />
+                    </li>
+                    <li>
+                        <form action="/logout" method="POST" class="logout m-0">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                            <button type="submit" class="nav-link text-danger">
+                                <img src="{{ url_for('static', filename='icons/log-out.svg') }}" alt="Logout" width="24"
+                                    height="20" class="icon me-2">Logout
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+    <hr>
+</div>
+{% endif %}

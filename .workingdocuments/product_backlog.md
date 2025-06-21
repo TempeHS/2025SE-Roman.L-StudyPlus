@@ -38,6 +38,8 @@
 
 * ~~Complete small loading animation~~
 
+* Sidebar
+
 * Create team list
 
 * 2 Factor Authentication
