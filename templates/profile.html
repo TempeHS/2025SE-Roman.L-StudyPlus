@@ -7,7 +7,10 @@
 </div>
 
 <div class="row justify-content-center">
-    <div class="col-6 col-md-4 col-lg-3">
+    <div class="col-12 col-md-6 col-lg-6 mb-4 d-flex justify-content-center">
+        <canvas id="taskProgressionChart" width="800" height="350"></canvas>
+    </div>
+    <div class="col-12 col-md-6 col-lg-2 mb-4 d-flex justify-content-center">
         <canvas id="taskPieChart" width="200" height="200"></canvas>
     </div>
 </div>
@@ -21,5 +24,12 @@
     window.overdue = {{ overdue }};
 </script>
 
+<!-- Progression chart -->
+<script nonce="{{ nonce }}">
+    window.progressionLabels = {{ labels|tojson }};
+    window.progressionStats = {{ stats|tojson }};
+</script>
+
+<script src="{{ url_for('static', filename='js/chart-progression.js') }}" nonce="{{ nonce }}"></script>
 <script src="{{ url_for('static', filename='js/chart-config.js') }}" nonce="{{ nonce }}"></script>
 {% endblock %}

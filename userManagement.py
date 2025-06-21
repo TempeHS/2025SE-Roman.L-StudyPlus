@@ -107,7 +107,7 @@ def addTodo(title, body, fullname, user_id, created_at, due_date, label):
 def getTodos(user_id):
     db = get_db()
     cur = db.cursor()
-    cur.execute("SELECT id, title, due_date, label, body, status FROM todos WHERE user_id = ? ORDER BY date DESC", (user_id,))
+    cur.execute("SELECT id, title, due_date, label, body, status FROM todos WHERE user_id = ?", (user_id,))
     todos = [
         {
             "id": row[0],
@@ -122,6 +122,19 @@ def getTodos(user_id):
     db.commit()
     return todos
 
+def mapTodoRows(rows):
+    return [
+        {
+            "id": row[0],
+            "title": row[1],
+            "due_date": row[2],
+            "label": row[3],
+            "body": row[4],
+            "completed": row[5]
+        }
+        for row in rows
+    ]
+
 def statusTodo(user_id, todo_id):
     db = get_db()
     cur = db.cursor()
@@ -132,7 +145,14 @@ def statusTodo(user_id, todo_id):
         status = row[0]
         # Toggle: if already complete (1), set to 0; else set to 1
         new_status = 0 if status == 1 else 1
-        cur.execute("UPDATE todos SET status = ? WHERE id = ? AND user_id = ?", (new_status, todo_id, user_id))
+        if new_status == 1:
+            completed_at = datetime.now()
+        else:
+            completed_at = None
+        cur.execute(
+            "UPDATE todos SET status = ?, completed_at = ? WHERE id = ? AND user_id = ?",
+            (new_status, completed_at, todo_id, user_id)
+        )
         db.commit()
 
 def deleteTodo(user_id, todo_id):
@@ -161,3 +181,56 @@ def recordStatus(user_id):
     db.commit()
 
     return completed, ongoing, overdue
+
+## Search Function
+def searchTodosByLabel(user_id, safe_query):
+    db = get_db()
+    cur = db.cursor()
+    cur.execute("SELECT id, title, due_date, label, body, status FROM todos WHERE user_id = ? AND label LIKE ?", (user_id, f'%{safe_query}%'))
+    data = cur.fetchall()
+    db.commit()
+    return mapTodoRows(data)
+
+def searchTodosByDate(user_id, safe_query):
+    db = get_db()
+    cur = db.cursor()
+    cur.execute("SELECT id, title, due_date, label, body, status FROM todos WHERE user_id = ? AND due_date LIKE ?", (user_id, f'%{safe_query}%'))
+    data = cur.fetchall()
+    db.commit()
+    return mapTodoRows(data)
+
+def searchTodosByContent(user_id, safe_query):
+    db = get_db()
+    cur = db.cursor()
+    cur.execute("SELECT id, title, due_date, label, body, status FROM todos WHERE user_id = ? AND (title LIKE ? OR body LIKE ?)", (user_id, f'%{safe_query}%', f'%{safe_query}%'))
+    data = cur.fetchall()
+    db.commit()
+    return mapTodoRows(data)
+
+def searchTodosAll(user_id, safe_query):
+    db = get_db()
+    cur = db.cursor()
+    cur.execute(
+        "SELECT id, title, due_date, label, body, status FROM todos WHERE user_id = ? AND (title LIKE ? OR body LIKE ? OR label LIKE ? OR due_date LIKE ?)",
+        (user_id, f'%{safe_query}%', f'%{safe_query}%', f'%{safe_query}%', f'%{safe_query}%')
+    )
+    data = cur.fetchall()
+    db.commit()
+    return mapTodoRows(data)
+
+def get_progression_stats(user_id):
+    db = get_db()
+    cur = db.cursor()
+    today = datetime.now().date()
+    stats = []
+    labels = []
+    for i in range(6, -1, -1):
+        day = today - timedelta(days=i)
+        cur.execute(
+            "SELECT COUNT(*) FROM todos WHERE user_id = ? AND status = 1 AND DATE(completed_at) = ?",
+            (user_id, day)
+        )
+        count = cur.fetchone()[0]
+        stats.append(count)
+        labels.append(day.strftime("%b %d"))
+    return labels, stats

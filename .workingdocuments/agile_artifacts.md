@@ -4,7 +4,7 @@
 
 - Working heatmap
 
-- Homepage reminders
+- ~~Homepage reminders~~
 
 - Create team list
 
@@ -12,7 +12,10 @@
 
 ## Increment (what must be achieved by the end of the sprint)
 
-- 
+- Ability to collaborate with others
+
+- ~~Ability to review progression~~
+
 ## Sprint Review (Focus on project management)
 
 - 

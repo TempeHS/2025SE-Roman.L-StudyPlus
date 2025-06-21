@@ -30,7 +30,7 @@
 
 * ~~Add preview section~~
 
-* Add progression line graph
+* ~~Add progression line graph~~
 
 * ~~Add pie-chart stats~~
 

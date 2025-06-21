@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import login_required, logout_user, current_user
 from src.config import app_log
@@ -10,8 +11,8 @@ auth_profile_bp = Blueprint('auth_profile', __name__)
 @login_required
 def profile():
     completed, ongoing, overdue = dbHandler.recordStatus(current_user.id)
-    # name = dbHandler.getUserById(current_user.id)
-    return render_template("profile.html", completed=completed, ongoing=ongoing, overdue=overdue)
+    labels, stats = dbHandler.get_progression_stats(current_user.id)
+    return render_template("profile.html", completed=completed, ongoing=ongoing, overdue=overdue, labels=labels, stats=stats)
 
 @auth_profile_bp.route("/delete_todo/<int:todo_id>", methods=["POST"])
 def delete_todo(todo_id):
@@ -27,7 +28,6 @@ def delete_todo(todo_id):
         flash("An error occurred while trying to delete your to-do. Please try again.", "error")
     return redirect(url_for("auth_dashboard.dashboard"))
 
-#
 #@auth_user_bp.route('/delete_log', methods=['POST'])
 #@login_required
 #def deleteLog():

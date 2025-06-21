@@ -73,7 +73,7 @@ def ratelimit_handler(e):
 # Login manager
 login_manager = LoginManager()
 login_manager.init_app(app)
-login_manager.login_view = "login"
+login_manager.login_view = "auth_login.login"
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -138,7 +138,7 @@ def is_safe_url(target):
         return True
     return False
 
-# Website blueprint
+# Website blueprint (Abstraction)
 app.register_blueprint(auth_signup_bp)
 app.register_blueprint(auth_login_bp)
 app.register_blueprint(auth_form_bp)
