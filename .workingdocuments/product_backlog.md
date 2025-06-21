@@ -8,9 +8,9 @@
 
 * Working API
 
-* Homepage reminders
+* ~~Homepage reminders~~
 
-* Customize homepage features
+* ~~Customize homepage features~~
 
 * ~~Add in-built filters and tags/labels~~
 
@@ -38,7 +38,7 @@
 
 * ~~Complete small loading animation~~
 
-* Sidebar
+* ~~Sidebar~~
 
 * Create team list
 

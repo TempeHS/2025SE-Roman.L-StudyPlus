@@ -6,7 +6,7 @@
 
 - Create team list
 
-- Sidebar
+- ~~Sidebar~~
 
 ## Increment (what must be achieved by the end of the sprint)
 
@@ -14,7 +14,7 @@
 
 - ~~Ability to review progression~~
 
-- Configurable navbar
+- ~~Configurable navbar~~
 
 ## Sprint Review (Focus on project management)
 
