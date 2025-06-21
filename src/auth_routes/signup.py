@@ -1,8 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from flask_login import login_user
 from src import sanitize_and_validate as sv, password_hashing as psh
 import userManagement as dbHandler
-from userManagement import User
 
 auth_signup_bp = Blueprint('auth', __name__)
 
