@@ -242,7 +242,6 @@ def set_user_layout(user_id, layout):
     cur.execute("UPDATE users SET layout = ? WHERE id = ?", (layout, user_id))
     db.commit()
 
-
 def set_user_theme(user_id, theme):
     db = get_db()
     cur = db.cursor()
