@@ -1,11 +1,15 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
+
 from src import sanitize_and_validate as sv, password_hashing as psh
 import userManagement as dbHandler
 
 auth_signup_bp = Blueprint('auth', __name__)
 
-@auth_signup_bp.route("/signup.html", methods=["GET", "POST"])
+@auth_signup_bp.route("/signup", methods=["GET", "POST"])
 def signup():
+    '''
+    Create an account
+    '''
     if request.method == "POST":
         email = request.form["email"]
         password = request.form["password"]

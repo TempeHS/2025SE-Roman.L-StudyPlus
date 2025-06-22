@@ -22,11 +22,11 @@
 
 * Create goal settings and achievements
 
-* Note section for each to-do task
+* ~~Note section for each to-do task~~
 
 * Replace quill JS
 
-* Add archive to-do section after completion
+* ~~Add archive to-do section after completion~~
 
 * ~~Add preview section~~
 

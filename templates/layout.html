@@ -10,7 +10,7 @@
     -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
-    <title>study plus</title>
+    <title>study-plus</title>
     <link rel="manifest" href="{{ url_for('static', filename='manifest.webmanifest') }}" />
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.png') }}" />
     <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" />
@@ -47,7 +47,6 @@
         <script src="{{ url_for('static', filename='js/serviceWorker.js') }}"></script>
         <script src="{{ url_for('static', filename='js/app.js') }}"></script>
         <script src="{{ url_for('static', filename='js/theme.js') }}" nonce="{{ g.nonce }}"></script>
-        <script src="{{ url_for('static', filename='js/fadein.js') }}" nonce="{{ nonce }}"></script>
+        <script src="{{ url_for('static', filename='js/fadein.js') }}" nonce="{{ g.nonce }}"></script>
 </body>
-
 </html>

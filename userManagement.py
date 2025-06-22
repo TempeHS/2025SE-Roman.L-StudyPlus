@@ -24,12 +24,13 @@ def close_db(exception):
         db.close()
 
 class User(UserMixin):
-    def __init__(self, user_id, email, firstname, lastname, layout):
+    def __init__(self, user_id, email, firstname, lastname, layout, privacy):
         self.id = user_id
         self.email = email
         self.firstname = firstname
         self.lastname = lastname
         self.layout = layout
+        self.privacy = privacy
 
 ## User related functions
 def insertUser(email, password, firstname, lastname):
@@ -39,7 +40,6 @@ def insertUser(email, password, firstname, lastname):
     db.commit()
     return True
 
-
 def userExists(email: str) -> bool:
     db = get_db()
     cur = db.cursor()
@@ -48,16 +48,14 @@ def userExists(email: str) -> bool:
     db.commit()
     return exists
 
-
 def retrieveUsers(email: str) -> tuple:
     time.sleep(random.uniform(0.1, 0.2))
     db = get_db()
     cur = db.cursor()
-    cur.execute("SELECT id, email, password, firstname, lastname, layout FROM users WHERE email = ?", (email,))
+    cur.execute("SELECT id, email, password, firstname, lastname, layout, privacy FROM users WHERE email = ?", (email,))
     user = cur.fetchone()
     db.commit()
     return user if user else False
-
 
 def getUserById(user_id):
     db = get_db()
@@ -66,9 +64,8 @@ def getUserById(user_id):
     user = cur.fetchone()
     db.commit()
     if user:
-        return User(user[0], user[1], user[3], user[4], user[9])
+        return User(user[0], user[1], user[3], user[4], user[9], user[10])
     return user
-
 
 def deleteUserById(user_id):
     try:
@@ -242,8 +239,8 @@ def set_user_layout(user_id, layout):
     cur.execute("UPDATE users SET layout = ? WHERE id = ?", (layout, user_id))
     db.commit()
 
-def set_user_theme(user_id, theme):
+def set_user_privacy(user_id, privacy):
     db = get_db()
     cur = db.cursor()
-    cur.execute("UPDATE users SET theme = ? WHERE id = ?", (theme, user_id))
+    cur.execute("UPDATE users SET privacy = ? WHERE id = ?", (privacy, user_id))
     db.commit()

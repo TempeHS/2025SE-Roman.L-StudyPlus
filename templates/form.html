@@ -1,8 +1,9 @@
 {% extends 'layout.html' %}
 {% block content %}
+<!-- Title -->
 <div class="container">
   <div class="row">
-    <h1>Create To-Do</h1>
+    <h1><img src="{{ url_for('static', filename='icons/edit.svg') }}"> Create Task</h1>
   </div>
 </div>
 
@@ -10,32 +11,32 @@
   <div class="row">
     <!-- Form Column -->
     <div class="col-md-6">
-    <form action="{{ url_for('auth_form.form') }}" method="POST" class="box" id="createLog">
-      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-      <div class="col-auto mb-3">
-        <label for="titleInput" class="form-label">Header</label>
-        <input name="title" type="text" class="form-control" id="titleInput" required maxlength="64">
-      </div>
-      <div class="col-auto mb-3">
-        <label for="dueDateInput" class="form-label">Due Date</label>
-        <input name="due_date" type="date" class="form-control" id="dueDateInput">
-      </div>
-      <div class="col-auto mb-3">
-        <label for="labelsInput" class="form-label">Labels</label>
-        <input name="labels" type="labels" class="form-control" id="labelsInput">
-      </div>
-      <div class="col-auto mb-3">
-        <label for="bodyText" class="form-label">Notes</label>
-        <textarea class="form-control" name="body" id="bodyText"></textarea>
-      </div>
-      <div class="col-auto">
-        <button type="submit" class="btn btn-primary mb-3">Create Log</button>
-      </div>
-    </form>
-  </div>
-  <!-- Preview Column -->
-      <div class="col-md 6">
-        <label for="titleInput" class="form-label">Preview</label>
+      <form action="{{ url_for('auth_form.form') }}" method="POST" class="box" id="createLog">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        <div class="col-auto mb-3">
+          <label for="titleInput" class="form-label">Header</label>
+          <input name="title" type="text" class="form-control" id="titleInput" required maxlength="64">
+        </div>
+        <div class="col-auto mb-3">
+          <label for="dueDateInput" class="form-label">Due Date</label>
+          <input name="due_date" type="date" class="form-control" id="dueDateInput">
+        </div>
+        <div class="col-auto mb-3">
+          <label for="labelsInput" class="form-label">Labels</label>
+          <input name="labels" type="labels" class="form-control" id="labelsInput">
+        </div>
+        <div class="col-auto mb-3">
+          <label for="bodyText" class="form-label">Notes</label>
+          <textarea class="form-control" name="body" id="bodyText"></textarea>
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary mb-3">Create Log</button>
+        </div>
+      </form>
+    </div>
+    <!-- Preview Column -->
+    <div class="col-md 6">
+      <label for="titleInput" class="form-label">Preview</label>
       <div id="logPreview" class="border p-3"></div>
     </div>
   </div>

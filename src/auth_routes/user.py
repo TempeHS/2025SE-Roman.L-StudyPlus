@@ -1,5 +1,6 @@
 from flask import Blueprint, redirect, url_for, flash, request, jsonify
 from flask_login import login_required, current_user, logout_user
+
 from src.config import app_log
 import userManagement as dbHandler
 

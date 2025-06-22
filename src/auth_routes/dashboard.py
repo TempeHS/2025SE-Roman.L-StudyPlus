@@ -8,6 +8,9 @@ import userManagement as dbHandler
 auth_dashboard_bp = Blueprint('auth_dashboard', __name__)
 
 def days_left(todos):
+    '''
+    Calculate days left for to-do macro
+    '''
     for todo in todos:
         due = todo.get('due_date')
         if due:
@@ -25,9 +28,12 @@ def days_left(todos):
             todo['due_date_obj'] = None
     return todos
 
-@auth_dashboard_bp.route("/dashboard.html", methods=["GET", "POST"])
+@auth_dashboard_bp.route("/dashboard", methods=["GET", "POST"])
 @login_required
 def dashboard():
+    '''
+    Dashboard
+    '''
     todos = dbHandler.getTodos(current_user.id)
     todos = days_left(todos)
     return render_template("dashboard.html", todos=todos, now=datetime.now())
@@ -42,9 +48,9 @@ def search_todos():
     filter_type = request.args.get('filter', 'all')
     safe_query = sv.sanitizeQuery(query)
 
-    # if filter_type == 'label':
-        # todos = dbHandler.searchTodosByLabel(current_user.id, safe_query)
-    if filter_type == 'date':
+    if filter_type == 'label':
+        todos = dbHandler.searchTodosByLabel(current_user.id, safe_query)
+    elif filter_type == 'date':
         todos = dbHandler.searchTodosByDate(current_user.id, safe_query)
     elif filter_type == 'content':
         todos = dbHandler.searchTodosByContent(current_user.id, safe_query)

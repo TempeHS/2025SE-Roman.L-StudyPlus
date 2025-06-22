@@ -4,13 +4,13 @@
 
 - ~~Homepage reminders~~
 
-- Create team list
+- ~~Create team list~~
 
 - ~~Sidebar~~
 
 ## Increment (what must be achieved by the end of the sprint)
 
-- Ability to collaborate with others
+- ~~Ability to collaborate with others~~
 
 - ~~Ability to review progression~~
 
@@ -18,15 +18,15 @@
 
 ## Sprint Review (Focus on project management)
 
-- 
-
 ### What challenges did you have
 
-- 
+- Underestimated the time needed for proper error handling and user 
 
 ### What did you do well
 
-- 
+- Used existing database functions effectively, minimising duplicate code
+
+- Implemented proper privacy controls
 
 ### What will you do differently next time
 

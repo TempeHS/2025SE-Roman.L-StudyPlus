@@ -1,12 +1,11 @@
 {% extends 'layout.html' %}
 {% block content %}
 {% import 'macros/todo_item.html' as todo_macros %}
+<!-- Search -->
 <div class="container mb-4">
     <form class="d-flex" method="GET" action="/search">
-        <input class="form-control me-2" type="search" name="query"
-            placeholder="Search tasks..." aria-label="Search">
-        <select class="form-select form-select-sm w-50 me-2" title="filter"
-            name="filter">
+        <input class="form-control me-2" type="search" name="query" placeholder="Search tasks..." aria-label="Search">
+        <select class="form-select form-select-sm w-50 me-2" title="filter" name="filter">
             <option value="all">All</option>
             <option value="developer">Label</option>
             <option value="date">Date</option>
@@ -16,28 +15,30 @@
     </form>
 </div>
 
+<!-- To-do list -->
 <div class="container mt-4">
     <div class="row">
         <div class="col-lg-8 mb-4">
-            <h4>Ongoing</h4>
+            <h4><img src="{{ url_for('static', filename='icons/alert-circle.svg') }}"> Ongoing</h4>
             <ul class="list-group mb-4">
                 {% for todo in todos if not todo.completed and (not todo.due_date_obj or todo.due_date_obj >= now) %}
-                    {{ todo_macros.render_todo(todo) }}
+                {{ todo_macros.render_todo(todo) }}
                 {% else %}
-                    <li class="list-group-item text-muted">No ongoing tasks!</li>
+                <li class="list-group-item text-muted">No ongoing tasks!</li>
                 {% endfor %}
             </ul>
-            <h4>Overdue</h4>
+            <h4><img src="{{ url_for('static', filename='icons/alert-triangle.svg') }}"> Overdue</h4>
             <ul class="list-group mb-4">
-                {% for todo in todos if not todo.completed and todo.due_date_obj and todo.due_date_obj < now %}
-                    {{ todo_macros.render_todo(todo) }}
-                {% else %}
-                    <li class="list-group-item text-muted">No overdue tasks!</li>
-                {% endfor %}
+                {% for todo in todos if not todo.completed and todo.due_date_obj and todo.due_date_obj < now %} {{
+                    todo_macros.render_todo(todo) }} {% else %} <li class="list-group-item text-muted">No overdue tasks!
+                    </li>
+                    {% endfor %}
             </ul>
             <h4>
-                <span>Completed</span>
-                <button class="btn btn-sm btn-link p-0 ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#completedCollapse" aria-expanded="false" aria-controls="completedCollapse" style="vertical-align: baseline;">
+                <span><img src="{{ url_for('static', filename='icons/archive.svg') }}"> Completed</span>
+                <button class="btn btn-sm btn-link p-0 ms-2" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#completedCollapse" aria-expanded="false" aria-controls="completedCollapse"
+                    style="vertical-align: baseline;">
                     <span class="bi bi-chevron-down"></span>
                     <img src="/static/icons/arrow-down.svg" alt="Icon" width="15" height="15">
                 </button>
@@ -45,33 +46,32 @@
             <div class="collapse" id="completedCollapse">
                 <ul class="list-group mb-4">
                     {% for todo in todos if todo.completed %}
-                        {{ todo_macros.render_todo(todo) }}
+                    {{ todo_macros.render_todo(todo) }}
                     {% else %}
-                        <li class="list-group-item text-muted">No completed tasks!</li>
+                    <li class="list-group-item text-muted">No completed tasks!</li>
                     {% endfor %}
                 </ul>
             </div>
         </div>
 
 <!-- Node Network -->
-<div class="col-lg-4 mb-2">
-        <div id="todo-network" style="height: 400px; border: 1px solid #ddd;"></div>
+        <div class="col-lg-4 mb-2">
+            <div id="todo-network" style="height: 400px; border: 1px solid #ddd;"></div>
+        </div>
     </div>
 </div>
-</div>
-
 
 <script src="https://unpkg.com/vis-network@9.1.2/dist/vis-network.min.js"></script>
 
 <script nonce="{{ nonce }}">
     window.todos = [
         {% for todo in todos %}
-        {
-            id: {{ todo.id }},
-            label: "{{ todo.title }}",
+    {
+        id: { { todo.id } },
+        label: "{{ todo.title }}",
             color: "{{ '#28a745' if todo.completed else '#ffc107' }}"
-        },
-        {% endfor %}
+    },
+    {% endfor %}
     ];
 </script>
 

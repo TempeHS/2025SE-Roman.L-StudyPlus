@@ -1,8 +1,16 @@
 {% extends 'layout.html' %}
 {% block content %}
+<!-- Title -->
 <div class="container">
     <div class="row">
-        <h1><img src="/static/icons/user.svg" alt="Icon" width="35" height="35"> {{ current_user.firstname }} {{ current_user.lastname }}</h1>
+        <h1>
+            {% if user.privacy == 'private' %}
+            <img src="/static/icons/lock.svg" alt="Private Profile" width="35" height="35">
+            {% else %}
+            <img src="/static/icons/user.svg" alt="Icon" width="35" height="35">
+            {% endif %}
+            {{ user.firstname }} {{ user.lastname }}
+        </h1>
     </div>
 </div>
 
@@ -27,8 +35,8 @@
 
 <!-- Progression chart -->
 <script nonce="{{ nonce }}">
-    window.progressionLabels = {{ labels|tojson }};
-    window.progressionStats = {{ stats|tojson }};
+    window.progressionLabels = {{ labels | tojson }};
+    window.progressionStats = {{ stats | tojson }};
 </script>
 
 <script src="{{ url_for('static', filename='js/chart-progression.js') }}" nonce="{{ nonce }}"></script>

@@ -3,6 +3,7 @@
 > - For SSL and HTTPS to work, change SSL context from None to Context and allow self-signed certificates (will show up as unsafe)
 >
 
+[![Python Version](https://img.shields.io/badge/python-3.12.2-blue.svg?style=flat-square)](https://www.python.org/downloads/release/python-3122/)
 # study-plus
 **CONTACT FOR ENQUIRIES: roman.lacbungan@education.nsw.gov.au**
 
@@ -23,10 +24,13 @@ To track/remind labelled tasks through a tree structure, improves student wellbe
 - App logging and alerts for suspicious activities
 - SSL and HTTPS support (allow self-signed certificates)
 - Dark Mode support
+- Configurable navbar
+- Progression chart
+- View public profiles
 
 ## Installation
 1. Clone repository
-<pre>git clone https://github.com/TempeHS/2025SE-Roman.L-StudyPlus2025</pre>
+<pre>git clone https://github.com/TempeHS/2025SE-Roman.L-StudyPlus</pre>
 
 2. Check directory
 <pre>cd 2025SE-Roman.L-StudyPlus2025</pre>

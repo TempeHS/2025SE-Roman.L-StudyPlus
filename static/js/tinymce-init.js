@@ -11,9 +11,9 @@ function validateForm() {
         selector: '#bodyText',
         license_key: 'gpl',
         script_nonce: document.querySelector('script[nonce]').getAttribute('nonce'),
-        height: 400,
+        height: 150,
         plugins: 'advlist autolink lists link charmap preview anchor',
-        toolbar: 'undo redo | formatselect | bold italic | bullist numlist', // | outdent indent
+        toolbar: 'undo redo | formatselect | bold italic', // | outdent indent
         menubar: false,
         setup: function(editor) {
             editor.on('change', function () {

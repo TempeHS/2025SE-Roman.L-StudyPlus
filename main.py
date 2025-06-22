@@ -138,7 +138,7 @@ def is_safe_url(target):
         return True
     return False
 
-# Website blueprint (Abstraction)
+# Website blueprint
 app.register_blueprint(auth_signup_bp)
 app.register_blueprint(auth_login_bp)
 app.register_blueprint(auth_form_bp)

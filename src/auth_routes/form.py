@@ -1,14 +1,16 @@
+import html
+
+from datetime import datetime
 from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import login_required, current_user
-import html
-from datetime import datetime
+
 import userManagement as dbHandler
 from src import sanitize_and_validate as sv
 from src.config import app_log
 
 auth_form_bp = Blueprint('auth_form', __name__)
 
-@auth_form_bp.route("/form.html", methods=["GET", "POST"])
+@auth_form_bp.route("/form", methods=["GET", "POST"])
 @login_required
 def form():
     '''
