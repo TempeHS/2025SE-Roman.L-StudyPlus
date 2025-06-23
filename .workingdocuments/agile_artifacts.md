@@ -1,37 +1,27 @@
 # Agile Artifacts
 
-## Sprint backlog list of achievables (annotate changes made during sprint, including data required) (removed 2FA and heatmap, added sidebar)
+## Sprint backlog list of achievables (annotate changes made during sprint, including data required)
 
-- ~~Homepage reminders, progression chart~~
+- Better dark mode/theme toggle
 
-- ~~Create team list~~
-
-- ~~Sidebar~~
+- Log user actions
 
 ## Increment (what must be achieved by the end of the sprint)
 
-- ~~Ability to collaborate with others~~
+- Primary user actions are logged 
 
-- ~~Ability to review progression~~
-
-- ~~Configurable navbar~~
+- Ability to enable dark mode with white text
 
 ## Sprint Review (Focus on project management)
 
 ### What challenges did you have
 
-- Underestimated the time needed for proper error handling and user 
-
-- Limited testing time led to overlooked UI bugs
+-
 
 ### What did you do well
 
-- Used existing database functions effectively, minimising duplicate code
-
-- Implemented proper privacy controls
+-
 
 ### What will you do differently next time
 
-- Set firmer boundaries on scope creep
-
-- Prioritise riskier or complex features earlier in the sprint
+-
