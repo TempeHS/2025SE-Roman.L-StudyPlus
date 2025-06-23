@@ -1,5 +1,4 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-
 from src import sanitize_and_validate as sv, password_hashing as psh
 import userManagement as dbHandler
 

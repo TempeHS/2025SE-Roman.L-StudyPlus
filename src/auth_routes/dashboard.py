@@ -1,7 +1,6 @@
 from datetime import datetime
 from flask import Blueprint, render_template, request
 from flask_login import login_required, current_user
-
 from src import sanitize_and_validate as sv
 import userManagement as dbHandler
 

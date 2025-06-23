@@ -40,6 +40,6 @@
 
 * ~~Sidebar~~
 
-* Create team list
+* ~~Create team list~~
 
 * 2 Factor Authentication

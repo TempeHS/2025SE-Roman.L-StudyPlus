@@ -2,7 +2,7 @@
 
 ## Sprint backlog list of achievables (annotate changes made during sprint, including data required) (removed 2FA and heatmap, added sidebar)
 
-- ~~Homepage reminders~~
+- ~~Homepage reminders, progression chart~~
 
 - ~~Create team list~~
 
@@ -22,6 +22,8 @@
 
 - Underestimated the time needed for proper error handling and user 
 
+- Limited testing time led to overlooked UI bugs
+
 ### What did you do well
 
 - Used existing database functions effectively, minimising duplicate code
@@ -30,4 +32,6 @@
 
 ### What will you do differently next time
 
-- 
+- Set firmer boundaries on scope creep
+
+- Prioritise riskier or complex features earlier in the sprint

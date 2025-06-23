@@ -49,11 +49,13 @@ Once deployed, the app can be accessed on either:
 
 ### [sprint-0.0.1](https://github.com/TempeHS/2025SE-Roman.L-StudyPlus/tree/sprint-0.0.1): June, 2025 - Roman Lacbungan
 
-After my client's feedback through Google Forms and emails, I added a node network to better visualise tasks. Additionally, I added a stat chart, a profile page, and properly abstracted my 'main.py' file. Overall, the primary components are working, however I still need to implement better security (2FA) and other features. I disabled my CSP however I still need it for later and my dark mode is not reliable. This particular sprint was quite long, thus future sprints will be minimised.
+After my client's feedback through Google Forms and throughout this sprint, I added a node network to better visualise tasks. Additionally, I added a stat chart, a profile page, and properly abstracted my 'main.py' file. Overall, the primary components are working, however I still need to implement better security such as two-factor authentication and other UI and UX enhancements. I disabled my CSP however I still need it for later and my dark mode is not reliable after adding new elements. This particular sprint was quite long, thus future sprints will be minimised.
 
-### [sprint-0.0.2](https://github.com/TempeHS/2025SE-Roman.L-StudyPlus/tree/sprint-0.0.1): June, 2025 - Roman Lacbungan
+### [sprint-0.0.2](https://github.com/TempeHS/2025SE-Roman.L-StudyPlus/tree/sprint-0.0.2): June, 2025 - Roman Lacbungan
 
-### [sprint-0.0.3](https://github.com/TempeHS/2025SE-Roman.L-StudyPlus/tree/sprint-0.0.1): June, 2025 - Roman Lacbungan
+I focused on improving the user experience by implementing public and private profiles with visible progression tracking. I also overhauled the navbar, and enabled the option of a topbar and sidebar to make navigation more intuitive and user-friendly. Documentation was a key focus as well, and I spent time cleaning it up to make the project easier to understand and contribute to. These changes lay the groundwork for a more scalable and polished interface moving forward. Future sprints will focus on security improvements such as logging the newly added user actions and restoring dark mode.
+
+### [sprint-0.0.3](https://github.com/TempeHS/2025SE-Roman.L-StudyPlus/tree/sprint-0.0.3): June, 2025 - Roman Lacbungan
 
 ## Screenshots
 ### Dashboard

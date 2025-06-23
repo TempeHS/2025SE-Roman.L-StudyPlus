@@ -28,6 +28,7 @@
         <button type="submit" class="btn btn-primary mt-2">Save</button>
     </form>
 
+    <!-- Searchs -->
     <form method="POST" action="{{ url_for('auth_profile.profile_search') }}">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <label for="user_id">Search user by ID:</label>

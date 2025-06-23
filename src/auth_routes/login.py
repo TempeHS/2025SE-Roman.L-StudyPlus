@@ -1,9 +1,7 @@
 import time, random
 from datetime import datetime
-
 from flask import Blueprint, request, redirect, url_for, flash
 from flask_login import login_user
-
 import userManagement as dbHandler
 from userManagement import User
 from src import password_hashing as psh
@@ -17,9 +15,9 @@ def is_safe_url(target):
     Prevent open redirects
     '''
     from urllib.parse import urlparse
-    ALLOWED_URLS = ['/', '/dashboard', '/index.html']
+    allowed_urls = ['/', '/dashboard', '/index.html']
     parsed_url = urlparse(target)
-    if parsed_url.netloc == '' and parsed_url.path in ALLOWED_URLS:
+    if parsed_url.netloc == '' and parsed_url.path in allowed_urls:
         return True
     return False
 
@@ -47,6 +45,7 @@ def login():
             return redirect("/dashboard")
 
         time.sleep(random.uniform(0.1, 0.2))
-        app_log.warning("Failed login attempt: %s | %s | %s", email, request.remote_addr, datetime.now())
+        app_log.warning("Failed login attempt: %s | %s | %s", 
+                        email, request.remote_addr, datetime.now())
         flash("Invalid credentials.", "error")
     return redirect(url_for('index'))

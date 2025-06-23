@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand d-flex align-items-center" href="/dashboard">
-      <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Icon" width="24" height="24"></a>
+      <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Icon" width="1" height="1"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -34,10 +34,9 @@
         <!-- Settings -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="{{ url_for('static', filename='icons/settings.svg') }}" alt="Settings" width="24" height="20"
-              class="icon">Settings</a>
-          <!-- Two-step verification -->
+            <img src="{{ url_for('static', filename='icons/settings.svg') }}" alt="Settings" width="24" height="20"class="icon">Settings</a>
           <ul class="dropdown-menu">
+            <!-- Two-step verification -->
             <li>
               <a class="dropdown-item disabled" href="#"><img src="{{ url_for('static', filename='icons/server.svg') }}"
                   alt="2FA" width="24" height="20" class="icon">Two-step verification</a>

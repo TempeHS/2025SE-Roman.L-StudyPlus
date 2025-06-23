@@ -1,9 +1,7 @@
 import html
-
 from datetime import datetime
 from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import login_required, current_user
-
 import userManagement as dbHandler
 from src import sanitize_and_validate as sv
 from src.config import app_log
@@ -23,7 +21,7 @@ def form():
         label = request.form["labels"]
 
         if not sv.validateLog(title, body, due_date, label):
-            return redirect(url_for('form.form'))
+            return redirect(url_for('auth_form.form'))
         safe_title = html.escape(title)
         safe_body = sv.sanitizeLog(body)
         safe_due_date = html.escape(due_date)
