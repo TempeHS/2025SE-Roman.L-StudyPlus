@@ -8,7 +8,7 @@
 **CONTACT FOR ENQUIRIES: roman.lacbungan@education.nsw.gov.au**
 
 ## Overview ##
-To track/remind labelled tasks through a tree structure, improves student wellbeing. An easily accessible app with visual reminders and streaks which motivate users and promote high productivity.
+To track/remind labelled tasks through a node network, improves student wellbeing. An easily accessible app with visual reminders and streaks which motivate users and promote high productivity.
 
 ## Main features ##
 - Strict Content Security Policy

@@ -1,19 +1,6 @@
-document.addEventListener('DOMContentLoaded', function() {
-function updatePreview() {
-    const title = document.getElementById('titleInput')?.value || '';
-    const due = document.getElementById('dueDateInput')?.value || '';
-    const labels = document.getElementById('labelsInput')?.value || '';
-    const body = document.getElementById('bodyText')?.value || '';
-    document.getElementById('logPreview').innerHTML = `
-        <h4>${title || ''}</h4>
-        <p><strong></strong> ${due || ''}</p>
-        <p><strong></strong> ${labels || ''}</p>
-        <p><strong></strong> ${body || ''}</p>
-    `;
-}
-['titleInput', 'dueDateInput', 'labelsInput', 'bodyText'].forEach(id => {
-    const element = document.getElementById(id);
-    if (element) element.addEventListener('input', updatePreview);
-});
-updatePreview();
-});
+document.addEventListener("DOMContentLoaded",function(){function e(){let e=document.getElementById("titleInput")?.value||"",t=document.getElementById("dueDateInput")?.value||"",n=document.getElementById("labelsInput")?.value||"",l=document.getElementById("bodyText")?.value||"";document.getElementById("logPreview").innerHTML=`
+        <h4><b>${e||""}</b></h4>
+        <p><strong></strong> ${t||""}</p>
+        <p><strong></strong> ${n||""}</p>
+        <p><strong></strong> ${l||""}</p>
+    `}["titleInput","dueDateInput","labelsInput","bodyText"].forEach(t=>{let n=document.getElementById(t);n&&n.addEventListener("input",e)}),e()});

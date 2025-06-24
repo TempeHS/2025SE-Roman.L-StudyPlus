@@ -10,7 +10,7 @@ def validatePassword(password):
     - Must be a string
     - Must be at least 8 characters long
     - Must contain at least one letter and one number
-    - Must not exceed 255 character
+    - Must not exceed 64 character
     '''
     if not isinstance(password, str):
         return False
@@ -20,7 +20,7 @@ def validatePassword(password):
         return False
     if not re.search(r"[0-9]", password):
         return False
-    if len(password) > 255:
+    if len(password) > 64:
         return False
     return True
 

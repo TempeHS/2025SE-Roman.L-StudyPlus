@@ -1,3 +1,1 @@
-document.addEventListener("DOMContentLoaded", function() {
-    document.body.classList.add('fade-in');
-});
+document.addEventListener("DOMContentLoaded",function(){document.body.classList.add("fade-in")});

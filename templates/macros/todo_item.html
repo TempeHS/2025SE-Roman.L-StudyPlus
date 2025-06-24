@@ -4,7 +4,7 @@
         <form method="POST" action="{{ url_for('auth_profile.complete_todo', todo_id=todo.id) }}" style="display:inline;">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
             <button class="btn btn-sm {% if todo.completed %}btn-success{% else %}btn-outline-secondary{% endif %} me-2" type="submit">
-                {% if todo.completed %}-{% else %}+{% endif %}
+                {% if todo.completed %}✔️{% else %}✔️{% endif %}
             </button>
         </form>
         <span class="flex-grow-1 {% if todo.completed %}text-decoration-line-through text-muted{% endif %}">
@@ -34,6 +34,4 @@
         <div class="badge bg-secondary">{{ todo.label }}</div>
     {% endif %}
 </li>
-
-<script src="{{ url_for('static', filename='js/dashboard.js') }}" nonce="{{ nonce }}"></script>
 {% endmacro %}
