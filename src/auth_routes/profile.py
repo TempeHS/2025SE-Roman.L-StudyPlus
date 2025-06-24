@@ -28,7 +28,7 @@ def user_profile(user_id):
         flash("User not found.", "error")
         return redirect(url_for('auth_profile.preferences'))
     if user.privacy == 'private':
-        flash("User not found.", "error")
+        flash("This profile is private.", "error")
         return redirect(url_for('auth_profile.preferences'))
     completed, ongoing, overdue = dbHandler.recordStatus(user_id)
     labels, stats = dbHandler.get_progression_stats(user_id)
@@ -51,9 +51,9 @@ def delete_todo(todo_id):
     '''
     Delete a to-do from the database
     '''
-    user_id = current_user.id
     try:
-        dbHandler.deleteTodo(user_id, todo_id)
+        dbHandler.deleteTodo(current_user.id, todo_id)
+        flash("Task is successfully deleted.", "error")
         app_log.info("Successful todo deletion: user_id=%s, todo_id=%s", user_id, todo_id)
     except Exception as e:
         app_log.error("Failed todo deletion attempt user_id=%s, todo_id=%s: %s", 
@@ -67,7 +67,13 @@ def complete_todo(todo_id):
     '''
     Complete a to-do
     '''
-    dbHandler.statusTodo(current_user.id, todo_id)
+    try:
+        dbHandler.statusTodo(current_user.id, todo_id)
+        flash("Task is successfully completed.", "success")
+    except Exception as e:
+        app_log.error("Failed todo completion attempt user_id=%s, todo_id=%s: %s", 
+        current_user.id, todo_id, str(e))
+        flash("An error occurred while trying to complete your to-do. Please try again.", "error")
     return redirect(url_for("auth_dashboard.dashboard"))
 
 # Preferences

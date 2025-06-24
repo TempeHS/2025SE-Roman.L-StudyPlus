@@ -66,14 +66,15 @@
 <script nonce="{{ nonce }}">
     window.todos = [
         {% for todo in todos %}
-    {
-        id: { { todo.id } },
-        label: "{{ todo.title }}",
+        {
+            id: {{ todo.id }},
+            label: {{ todo.title | tojson }},
             color: "{{ '#28a745' if todo.completed else '#ffc107' }}"
-    },
-    {% endfor %}
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
     ];
 </script>
+
 
 <script src="{{ url_for('static', filename='js/todo-network.js') }}" nonce="{{ nonce }}"></script>
 <script src="{{ url_for('static', filename='js/dashboard.js') }}" nonce="{{ nonce }}"></script>

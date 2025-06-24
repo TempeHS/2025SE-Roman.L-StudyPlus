@@ -74,7 +74,7 @@
                     </li>
                     <!-- Logout -->
                     <li>
-                        <form action="/logout" method="POST" class="Logout">
+                        <form action="/logout" method="POST" class="logout">
                             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                             <button type="submit" class="nav-link text-danger">
                                 <img src="{{ url_for('static', filename='icons/log-out.svg') }}" alt="Logout" width="24"

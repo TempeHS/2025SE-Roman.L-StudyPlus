@@ -32,5 +32,6 @@ def signup():
         firstname = firstname.capitalize()
         lastname = lastname.capitalize()
         dbHandler.insertUser(email, password, firstname, lastname)
+        flash('Signup successful!', 'success')
         return render_template("/index.html")
     return render_template("/signup.html")

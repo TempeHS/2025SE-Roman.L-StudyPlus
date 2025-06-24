@@ -1,15 +1,1 @@
-document.addEventListener('DOMContentLoaded', function () {
-    document.body.dataset.bsTheme = localStorage.getItem('theme') || 'light';
-    document.getElementById('flexSwitchCheckChecked').checked = document.body.dataset.bsTheme === 'dark';
-
-    // Attach event listener for dark mode toggle
-    document.getElementById('flexSwitchCheckChecked').addEventListener('click', darkMode);
-});
-
-// Bootstrap dark mode
-function darkMode() {
-    const newTheme = document.body.dataset.bsTheme === "dark" ? "light" : "dark";
-    document.body.dataset.bsTheme = newTheme;
-    localStorage.setItem('theme', newTheme);
-    document.getElementById('flexSwitchCheckChecked').checked = newTheme === 'dark';
-}
+document.addEventListener("DOMContentLoaded",function(){document.body.dataset.bsTheme=localStorage.getItem("theme")||"light",document.getElementById("flexSwitchCheckChecked").checked="dark"===document.body.dataset.bsTheme,document.getElementById("flexSwitchCheckChecked").addEventListener("click",darkMode)});function darkMode(){let e="dark"===document.body.dataset.bsTheme?"light":"dark";document.body.dataset.bsTheme=e,localStorage.setItem("theme",e),document.getElementById("flexSwitchCheckChecked").checked="dark"===e}
