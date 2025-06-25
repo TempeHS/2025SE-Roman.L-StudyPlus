@@ -97,8 +97,8 @@ def root():
         # Server Side CSP is consistent with meta CSP in layout.html
         "base-uri": "'self'",
         "default-src": "'self'",
-        "style-src": "'self' 'unsafe-inline'",
-        "script-src": "'self' 'unsafe-inline'",
+        "style-src": "'self'",
+        "script-src": "'self'",
         "img-src": "'self' data:",
         "media-src": "'self'",
         "font-src": "'self'",

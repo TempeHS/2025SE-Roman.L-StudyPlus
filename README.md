@@ -4,6 +4,9 @@
 >
 
 [![Python Version](https://img.shields.io/badge/python-3.12.2-blue.svg?style=flat-square)](https://www.python.org/downloads/release/python-3122/)
+[![JavaScript Version](https://img.shields.io/badge/javascript-ES2025-yellow.svg?style=flat-square)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![CSS Version](https://img.shields.io/badge/css-3-blue.svg?style=flat-square)](https://developer.mozilla.org/en-US/docs/Web/CSS)
+[![HTML Version](https://img.shields.io/badge/html-5-orange.svg?style=flat-square)](https://developer.mozilla.org/en-US/docs/Web/HTML)
 # study-plus
 **CONTACT FOR ENQUIRIES: roman.lacbungan@education.nsw.gov.au**
 
@@ -11,6 +14,7 @@
 To track/remind labelled tasks through a node network, improves student wellbeing. An easily accessible app with visual reminders and streaks which motivate users and promote high productivity.
 
 ## Main features ##
+### Security features
 - Strict Content Security Policy
   - No inline `<script></script>`.
   - Restricted `<iframe>` loading
@@ -23,8 +27,10 @@ To track/remind labelled tasks through a node network, improves student wellbein
 - Strict input sanitization and validation
 - App logging and alerts for suspicious activities
 - SSL and HTTPS support (allow self-signed certificates)
+### Study features
+- Keep track of tasks
 - Dark Mode support
-- Configurable navbar
+- Configurable layout
 - Progression chart
 - View public profiles
 
@@ -57,8 +63,21 @@ I focused on improving the user experience by implementing public and private pr
 
 ### [sprint-0.0.3](https://github.com/TempeHS/2025SE-Roman.L-StudyPlus/tree/sprint-0.0.3): June, 2025 - Roman Lacbungan
 
+I focused on code optimisations and security issues. These methods included JS minifcation and lazy loading on images. Since this is my final sprint, I uploaded screenshots and a GIF of the final product. Additionally, clients tested a prototype with a forwarded address which was private to the organisation.
+
+## Examples
+### Creating a task
+![alt text](static/icons/desktop_screen_recording.gif)
+
 ## Screenshots
 ### Dashboard
+![Dashboard](static/icons/desktop_dashboard_screenshot.png)
+### Create
+![Create](static/icons/desktop_create_screenshot.png)
+### Profile
+![Profile](static/icons/desktop_profile_screenshot.png)
+### Preferences
+![Preferences](static/icons/desktop_preferences_screenshot.png)
 
 ## Acknowledgments
 
@@ -66,3 +85,8 @@ Inspiration, code snippets, etc.
 
 * https://github.com/TempeHS/2025SE-Roman.L-HSCTask1
 * https://github.com/TempeHS/Secure_Flask_PWA_Template
+* https://github.com/makenotion
+* https://visjs.github.io/vis-network/docs/network/
+* https://www.chartjs.org/docs/latest/charts/line.html
+* https://www.chartjs.org/docs/latest/charts/doughnut.html
+* https://getbootstrap.com/docs/5.0/examples/sidebars/

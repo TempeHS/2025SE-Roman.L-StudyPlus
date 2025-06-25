@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!--
     <meta http-equiv="Content-Security-Policy"
-    content="base-uri 'self'; default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self'; object-src 'self'; worker-src 'self'; frame-src 'none'; form-action 'self'; manifest-src 'self'" />
+    content="base-uri 'self'; default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self'; object-src 'self'; worker-src 'self'; frame-src 'none'; form-action 'self'; manifest-src 'self'" />
     -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
@@ -46,6 +46,6 @@
         <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/serviceWorker.js') }}"></script>
         <script src="{{ url_for('static', filename='js/app.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/fadein.js') }}" nonce="{{ g.nonce }}"></script>
+        <script src="{{ url_for('static', filename='js/fadein.js') }}" nonce="{{ nonce }}"></script>
 </body>
 </html>

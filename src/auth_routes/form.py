@@ -21,7 +21,7 @@ def form():
         label = request.form["labels"]
 
         if not sv.validateLog(title, body, due_date, label):
-            ("An error occurred while trying to complete your to-do. Please try again.", "error")
+            flash("An error occurred while trying to complete your to-do. Please try again.", "error")
             return redirect(url_for('auth_form.form'))
         safe_title = html.escape(title)
         safe_due_date = html.escape(due_date)
@@ -32,7 +32,8 @@ def form():
         user = dbHandler.getUserById(user_id)
         fullname = f"{user.firstname} {user.lastname}"
         current_date = datetime.now().strftime("%Y-%m-%d %H:%M")
-        dbHandler.addTodo(safe_title, safe_body, fullname, user_id, current_date, safe_due_date, safe_label)
+        dbHandler.addTodo(safe_title, safe_body,
+        fullname, user_id, current_date, safe_due_date, safe_label)
         app_log.info("New to-do created by %s: %s", user_id, title)
         flash("Task is successfully created.", "success")
         return redirect(url_for('auth_dashboard.dashboard'))

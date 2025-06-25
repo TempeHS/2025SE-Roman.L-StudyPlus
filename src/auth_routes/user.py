@@ -46,3 +46,13 @@ def downloadUser():
     response = jsonify(user_data)
     response.headers["Content-Disposition"] = f"attachment;filename=user_data_{user_id}.json"
     return response
+
+@auth_user_bp.route('/logout', methods=['POST'])
+@login_required
+def logout():
+    '''
+    Logout for logged in
+    '''
+    logout_user()
+    flash("You have been logged out.", "info")
+    return redirect('/index.html')

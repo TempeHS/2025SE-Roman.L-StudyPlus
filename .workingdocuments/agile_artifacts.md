@@ -4,11 +4,11 @@
 
 - Better dark mode/theme toggle
 
-- Log user actions
+- ~~Log user actions~~
 
 ## Increment (what must be achieved by the end of the sprint)
 
-- Primary user actions are logged 
+- ~~Primary user actions are logged~~ 
 
 - Ability to enable dark mode with white text
 

@@ -103,13 +103,3 @@ def set_theme():
     dbHandler.set_user_privacy(current_user.id, privacy)
     flash("Privacy preference updated.", "success")
     return redirect(url_for('auth_profile.profile'))
-
-@auth_profile_bp.route('/logout', methods=['POST'])
-@login_required
-def logout():
-    '''
-    Logout for logged in
-    '''
-    logout_user()
-    flash("You have been logged out.", "info")
-    return redirect('/index.html')
