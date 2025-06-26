@@ -97,8 +97,8 @@ def root():
         # Server Side CSP is consistent with meta CSP in layout.html
         "base-uri": "'self'",
         "default-src": "'self'",
-        "style-src": "'self'",
-        "script-src": "'self'",
+        "style-src": "'self' 'nonce-{{ nonce }}' https://cdn.jsdelivr.net/npm/chart.js https://unpkg.com",
+        "script-src": "'self' 'nonce-{{ nonce }}' https://cdn.jsdelivr.net/npm/chart.js https://unpkg.com",
         "img-src": "'self' data:",
         "media-src": "'self'",
         "font-src": "'self'",

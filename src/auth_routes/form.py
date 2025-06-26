@@ -23,6 +23,12 @@ def form():
         if not sv.validateLog(title, body, due_date, label):
             flash("An error occurred while trying to complete your to-do. Please try again.", "error")
             return redirect(url_for('auth_form.form'))
+
+        user_todos_count = dbHandler.countTodosByUser(current_user.id)
+        if user_todos_count >= 99:
+            flash("You have reached the maximum number of 99 tasks. Please delete some tasks before adding new ones.", "error")
+            return redirect(url_for('auth_form.form'))
+
         safe_title = html.escape(title)
         safe_due_date = html.escape(due_date)
         safe_label = html.escape(label)

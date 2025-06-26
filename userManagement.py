@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from flask import flash, redirect, url_for, g
 from flask_login import UserMixin
 from flask import Flask
-
+    
 app = Flask(__name__)
 
 DATABASE = '.databaseFiles/database.db'
@@ -141,7 +141,6 @@ def statusTodo(user_id, todo_id):
     row = cur.fetchone()
     if row is not None:
         status = row[0]
-        # Toggle: if already complete (1), set to 0; else set to 1
         new_status = 0 if status == 1 else 1
         if new_status == 1:
             completed_at = datetime.now()
@@ -216,6 +215,18 @@ def searchTodosAll(user_id, safe_query):
     db.commit()
     return mapTodoRows(data)
 
+def countTodosByUser(user_id):
+    """
+    Returns the total number of todos for a given user.
+    """
+    db = get_db()
+    cur = db.cursor()
+    cur.execute("SELECT COUNT(*) FROM todos WHERE user_id = ?", (user_id,))
+    count = cur.fetchone()[0]
+    db.commit()
+    return count
+
+## Profile
 def get_progression_stats(user_id):
     db = get_db()
     cur = db.cursor()

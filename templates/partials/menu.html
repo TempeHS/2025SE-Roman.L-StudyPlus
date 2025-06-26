@@ -57,7 +57,7 @@
             <li>
               <form action="{{ url_for('auth_user.deleteUser') }}" method="POST" class="deleteUser">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                <button type="submit" class="dropdown-item"><img
+                <button type="submit" class="dropdown-item text-danger"><img
                     src="{{ url_for('static', filename='icons/user-minus.svg') }}" alt="DeleteUser" width="24"
                     height="20" class="icon">Delete
                   account</button>

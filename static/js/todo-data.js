@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",()=>{let t=document.getElementById("todo-data");if(!t){console.error("todo-data element not found!");return}try{let o=t.getAttribute("data-todos");window.todos=JSON.parse(o),console.log("Loaded todos:",window.todos)}catch(e){console.error("Failed to parse todos JSON:",e)}});

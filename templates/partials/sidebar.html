@@ -1,7 +1,7 @@
 {% if current_user.is_authenticated %}
 <!-- Bootstrap Sidebar -->
-<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 250px; min-height: 100vh;">
-    <a href="/dashboard" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary">
+    <a href="/dashboard" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
         <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Icon" width="32" height="32"
             class="me-2">
         <span class="fs-4">study-plus</span>
@@ -10,28 +10,28 @@
     <ul class="nav nav-pills flex-column mb-auto">
         <!-- Home -->
         <li class="nav-item">
-            <a href="/dashboard" class="nav-link link-dark" aria-current="page">
+            <a href="/dashboard" class="nav-link link-body-emphasis" aria-current="page">
                 <img src="{{ url_for('static', filename='icons/home.svg') }}" alt="Home" width="24" height="20"
                     class="icon me-2">Home
             </a>
         </li>
         <!-- Create -->
         <li>
-            <a href="/form" class="nav-link link-dark">
+            <a href="/form" class="nav-link link-body-emphasis">
                 <img src="{{ url_for('static', filename='icons/plus-square.svg') }}" alt="Create" width="24" height="20"
                     class="icon me-2">Create
             </a>
         </li>
         <!-- Profile -->
         <li>
-            <a href="/profile" class="nav-link link-dark">
+            <a href="/profile" class="nav-link link-body-emphasis">
                 <img src="{{ url_for('static', filename='icons/user.svg') }}" alt="Profile" width="24" height="20"
                     class="icon me-2">Profile
             </a>
         </li>
         <!-- Settings -->
         <li>
-            <a class="nav-link link-dark" data-bs-toggle="collapse" href="#sidebarSettings" role="button"
+            <a class="nav-link link-body-emphasis" data-bs-toggle="collapse" href="#sidebarSettings" role="button"
                 aria-expanded="false" aria-controls="sidebarSettings">
                 <img src="{{ url_for('static', filename='icons/settings.svg') }}" alt="Settings" width="24" height="20"
                     class="icon me-2">Settings
@@ -47,14 +47,14 @@
                     </li>
                     <!-- Download Data -->
                     <li>
-                        <a class="nav-link link-dark" href="/download_data?user_id={{ current_user.id }}">
+                        <a class="nav-link link-body-emphasis" href="/download_data?user_id={{ current_user.id }}">
                             <img src="{{ url_for('static', filename='icons/user.svg') }}" alt="DownloadUser" width="24"
                                 height="20" class="icon me-2">Download user data
                         </a>
                     </li>
                     <!-- Preferences -->
                     <li>
-                        <a href="/preferences" class="nav-link link-dark">
+                        <a href="/preferences" class="nav-link link-body-emphasis">
                             <img src="{{ url_for('static', filename='icons/user.svg') }}" alt="Preferences" width="24"
                                 height="20" class="icon me-2">Preferences
                         </a>

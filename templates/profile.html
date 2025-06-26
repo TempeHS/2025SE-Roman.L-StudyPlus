@@ -5,9 +5,9 @@
     <div class="row">
         <h1>
             {% if user.privacy == 'private' %}
-            <img src="/static/icons/lock.svg" alt="Private Profile" width="35" height="35">
+            <img src="/static/icons/lock.svg" alt="Private Profile" width="35" height="35" class="icon me-2">
             {% else %}
-            <img src="/static/icons/user.svg" alt="Icon" width="35" height="35">
+            <img src="/static/icons/user.svg" alt="Icon" width="35" height="35" class="icon me-2">
             {% endif %}
             {{ user.firstname }} {{ user.lastname }}
         </h1>
@@ -24,21 +24,31 @@
     </div>
 </div>
 
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js" nonce="{{ nonce }}"></script>
 
-<!-- Pie chart -->
+<div id="chart-data"
+    data-completed="{{ completed }}"
+    data-ongoing="{{ ongoing }}"
+    data-overdue="{{ overdue }}"
+    data-labels='{{ labels | tojson }}'
+    data-stats='{{ stats | tojson }}'>
+</div>
+
+<!-- Pie chart
 <script nonce="{{ nonce }}">
     window.completed = {{ completed }};
     window.ongoing = {{ ongoing }};
     window.overdue = {{ overdue }};
 </script>
 
-<!-- Progression chart -->
 <script nonce="{{ nonce }}">
     window.progressionLabels = {{ labels | tojson }};
     window.progressionStats = {{ stats | tojson }};
 </script>
+-->
 
+<script src="{{ url_for('static', filename='js/profile-data.js') }}" nonce="{{ nonce }}"></script>
 <script src="{{ url_for('static', filename='js/chart-progression.js') }}" nonce="{{ nonce }}"></script>
 <script src="{{ url_for('static', filename='js/chart-config.js') }}" nonce="{{ nonce }}"></script>
 {% endblock %}

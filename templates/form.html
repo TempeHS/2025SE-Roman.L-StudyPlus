@@ -44,6 +44,6 @@
 </div>
 
 <script src="{{ url_for('static', filename='js/todo-preview.js') }}" nonce="{{ nonce }}"></script>
-<script src="/static/tinymce/js/tinymce/tinymce.min.js" nonce="{{ nonce }}" referrerpolicy="origin"></script>
+<script src="/static/tinymce/js/tinymce/tinymce.min.js" nonce="{{ g.nonce }}" referrerpolicy="origin"></script>
 <script src="{{ url_for('static', filename='js/tinymce-init.js') }}" nonce="{{ nonce }}"></script>
 {% endblock %}

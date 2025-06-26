@@ -7,6 +7,7 @@ from userManagement import User
 from src import password_hashing as psh
 from src.config import app_log
 from src.session_state import logout_required
+from urllib.parse import urlparse
 
 auth_login_bp = Blueprint('auth_login', __name__)
 
@@ -14,7 +15,6 @@ def is_safe_url(target):
     '''
     Prevent open redirects
     '''
-    from urllib.parse import urlparse
     allowed_urls = ['/', '/dashboard', '/index.html']
     parsed_url = urlparse(target)
     if parsed_url.netloc == '' and parsed_url.path in allowed_urls:

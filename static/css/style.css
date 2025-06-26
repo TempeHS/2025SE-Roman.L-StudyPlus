@@ -24,12 +24,18 @@ body.fade-in {
   padding: 1rem 0;
 }
 
+/* Layout */
 .navbar {
   height: 50px;
 }
 
 .nav-link {
   display: flex;
+}
+
+.sidebar {
+  width: 400px;
+  min-height: 100vh;
 }
 
 .icon {
@@ -72,20 +78,13 @@ body.fade-in {
     margin-bottom: 6px;
 }
 
-/*
-@font-face {
-  font-family: 'Roboto';
-  src:url('/fonts/roboto-regular.woff2') format('woff2'),
-      url('/fonts/roboto-regular.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
+/* To do list */
+.todo-network {
+  height: 400px;
+  border: 1px solid #ddd;
 }
 
-@font-face {
-  font-family: 'Noto Sans';
-  src:url('/fonts/noto-sans-regular.woff2') format('woff2'),
-      url('/fonts/noto-sans-regular.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
+/* Icons */
+[data-bs-theme="dark"] .icon {
+    filter: invert(1) brightness(1.5);
 }
-*/

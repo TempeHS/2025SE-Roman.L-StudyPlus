@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, flash, request
+from flask import Blueprint, render_template, redirect, url_for, flash, request, make_response
 from flask_login import login_required, logout_user, current_user
 from src.config import app_log
 import userManagement as dbHandler
@@ -51,6 +51,8 @@ def delete_todo(todo_id):
     '''
     Delete a to-do from the database
     '''
+    user_id = current_user.id
+    todo_id = request.form.get('todo_id')
     try:
         dbHandler.deleteTodo(current_user.id, todo_id)
         flash("Task is successfully deleted.", "error")
@@ -80,6 +82,9 @@ def complete_todo(todo_id):
 @auth_profile_bp.route("/preferences", methods=["GET", "POST"])
 @login_required
 def preferences():
+    '''
+    Choose user preferences
+    '''
     return render_template("preferences.html")
 
 @auth_profile_bp.route('/set_layout', methods=['POST'])

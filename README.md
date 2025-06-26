@@ -29,6 +29,7 @@ To track/remind labelled tasks through a node network, improves student wellbein
 - SSL and HTTPS support (allow self-signed certificates)
 ### Study features
 - Keep track of tasks
+- Search function
 - Dark Mode support
 - Configurable layout
 - Progression chart

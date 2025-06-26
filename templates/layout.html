@@ -4,10 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!--
     <meta http-equiv="Content-Security-Policy"
-    content="base-uri 'self'; default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self'; object-src 'self'; worker-src 'self'; frame-src 'none'; form-action 'self'; manifest-src 'self'" />
-    -->
+    content="base-uri 'self'; default-src 'self'; style-src 'self' 'nonce-{{ g.nonce }}' https://cdn.jsdelivr.net/npm/chart.js https://unpkg.com; script-src 'self' 'nonce-{{ g.nonce }}' https://cdn.jsdelivr.net/npm/chart.js https://unpkg.com; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self'; object-src 'self'; worker-src 'self'; frame-src 'none'; form-action 'self'; manifest-src 'self'" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
     <title>study-plus</title>
@@ -16,10 +14,10 @@
     <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" />
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
     {% set sidebar_layout = current_user.is_authenticated and current_user.layout == 'sidebar' %}
     {% if sidebar_layout %}
-    <div class="d-flex">
+    <div class="d-flex flex-grow-1">
         {% include 'partials/sidebar.html' %}
         <div class="flex-grow-1">
             {% else %}
