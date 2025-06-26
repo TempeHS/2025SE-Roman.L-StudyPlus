@@ -18,17 +18,19 @@
 
 ## Sprint Review (Focus on project management)
 
-- Demonstrated the new dashboard features
-
 ### What challenges did you have
 
-- Having troubles with my strict CSP, heatmap was not working
+- Having troubles with my strict CSP
 
-- Poor documentation
+- Heatmap was not working due to how data was fetched
+
+- Poor documentation in code
 
 ### What did you do well
 
-- Communicating with client
+- Communicating with the client
+
+- Demonstrated the new dashboard features
 
 ### What will you do differently next time
 
