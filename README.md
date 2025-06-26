@@ -64,7 +64,7 @@ I focused on improving the user experience by implementing public and private pr
 
 ### [sprint-0.0.3](https://github.com/TempeHS/2025SE-Roman.L-StudyPlus/tree/sprint-0.0.3): June, 2025 - Roman Lacbungan
 
-I focused on code optimisations and security issues. These methods included JS minifcation and lazy loading on images. Since this is my final sprint, I uploaded screenshots and a GIF of the final product. Additionally, clients tested a prototype with a forwarded address which was private to the organisation.
+I focused on code optimisations and security issues. These methods included JS minifcation, moving inline scripts to external files, and lazy loading on images. I also improved accessibility with aria labels and improved dark mode by changing text attributes. Since this is my final sprint, I completed my READ.ME with screenshots, a GIF of the final product and wrote summaries of all three sprints. Additionally, clients tested a prototype with a forwarded address which was private to the organisation.
 
 ## Examples
 ### Creating a task
