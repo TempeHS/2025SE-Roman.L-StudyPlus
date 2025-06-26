@@ -19,38 +19,55 @@
 <div class="container mt-4">
     <div class="row">
         <div class="col-lg-8 mb-4">
-            <h4><img src="{{ url_for('static', filename='icons/alert-circle.svg') }}" class="icon me-2">Ongoing</h4>
-            <ul class="list-group mb-4">
-                {% for todo in todos if not todo.completed and (not todo.due_date_obj or todo.due_date_obj >= now) %}
-                {{ todo_macros.render_todo(todo) }}
-                {% else %}
-                <li class="list-group-item text-muted">No ongoing tasks!</li>
-                {% endfor %}
-            </ul>
-            <h4><img src="{{ url_for('static', filename='icons/alert-triangle.svg') }}" class="icon me-2">Overdue</h4>
-            <ul class="list-group mb-4">
-                {% for todo in todos if not todo.completed and todo.due_date_obj and todo.due_date_obj < now %} {{
-                    todo_macros.render_todo(todo) }} {% else %} <li class="list-group-item text-muted">No overdue tasks!
-                    </li>
-                    {% endfor %}
-            </ul>
-            <h4>
-                <span><img src="{{ url_for('static', filename='icons/archive.svg') }}" class="icon me-2">Completed</span>
-                <button class="btn btn-sm btn-link p-0 ms-2" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#completedCollapse" aria-expanded="false" aria-controls="completedCollapse">
-                    <span class="bi bi-chevron-down"></span>
-                    <img src="/static/icons/chevron-down.svg" alt="Icon" width="15" height="15" class="icon me-2">
-                </button>
-            </h4>
-            <div class="collapse" id="completedCollapse">
+            <section aria-labelledby="ongoing-tasks-heading" role="region">
+                <h4 id="ongoing-tasks-heading">
+                    <img src="{{ url_for('static', filename='icons/alert-circle.svg') }}" class="icon me-2" alt="" aria-hidden="true">Ongoing
+                </h4>
                 <ul class="list-group mb-4">
-                    {% for todo in todos if todo.completed %}
+                    {% for todo in todos if not todo.completed and (not todo.due_date_obj or todo.due_date_obj >= now) %}
                     {{ todo_macros.render_todo(todo) }}
                     {% else %}
-                    <li class="list-group-item text-muted">No completed tasks!</li>
+                    <li class="list-group-item text-muted">No ongoing tasks!</li>
                     {% endfor %}
                 </ul>
-            </div>
+            </section>
+            <section aria-labelledby="overdue-tasks-heading" role="region">
+                <h4 id="overdue-tasks-heading">
+                    <img src="{{ url_for('static', filename='icons/alert-triangle.svg') }}" class="icon me-2" alt="" aria-hidden="true">Overdue
+                </h4>
+                <ul class="list-group mb-4">
+                    {% for todo in todos if not todo.completed and todo.due_date_obj and todo.due_date_obj < now %}
+                    {{ todo_macros.render_todo(todo) }}
+                    {% else %}
+                    <li class="list-group-item text-muted">No overdue tasks!</li>
+                    {% endfor %}
+                </ul>
+            </section>
+            <section aria-labelledby="completed-tasks-heading" role="region">
+                <h4 id="completed-tasks-heading">
+                    <span>
+                        <img src="{{ url_for('static', filename='icons/archive.svg') }}" class="icon me-2" alt="" aria-hidden="true">Completed
+                    </span>
+                    <button class="btn btn-sm btn-link p-0 ms-2" type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#completedCollapse"
+                        aria-expanded="false"
+                        aria-controls="completedCollapse"
+                        aria-label="Show or hide completed tasks">
+                        <span class="bi bi-chevron-down" aria-hidden="true"></span>
+                        <img src="/static/icons/chevron-down.svg" alt="" width="15" height="15" class="icon me-2" aria-hidden="true">
+                    </button>
+                </h4>
+                <div class="collapse" id="completedCollapse" aria-labelledby="completed-tasks-heading">
+                    <ul class="list-group mb-4">
+                        {% for todo in todos if todo.completed %}
+                        {{ todo_macros.render_todo(todo) }}
+                        {% else %}
+                        <li class="list-group-item text-muted">No completed tasks!</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </section>
         </div>
 
 <script src="https://unpkg.com/vis-network@9.1.2/dist/vis-network.min.js"></script>

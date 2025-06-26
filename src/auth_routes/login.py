@@ -1,5 +1,7 @@
-import time, random
+import time
+import random
 from datetime import datetime
+from urllib.parse import urlparse
 from flask import Blueprint, request, redirect, url_for, flash
 from flask_login import login_user
 import userManagement as dbHandler
@@ -7,7 +9,6 @@ from userManagement import User
 from src import password_hashing as psh
 from src.config import app_log
 from src.session_state import logout_required
-from urllib.parse import urlparse
 
 auth_login_bp = Blueprint('auth_login', __name__)
 
@@ -45,7 +46,7 @@ def login():
             return redirect("/dashboard")
 
         time.sleep(random.uniform(0.1, 0.2))
-        app_log.warning("Failed login attempt: %s | %s | %s", 
+        app_log.warning("Failed login attempt: %s | %s | %s",
                         email, request.remote_addr, datetime.now())
         flash("Invalid credentials.", "error")
     return redirect(url_for('index'))

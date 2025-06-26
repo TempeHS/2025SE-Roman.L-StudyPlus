@@ -6,15 +6,13 @@
 
 * Working heatmap
 
-* Working API
-
 * ~~Homepage reminders~~
 
 * ~~Customize homepage features~~
 
 * ~~Add in-built filters and tags/labels~~
 
-* Better dark mode/theme toggle
+* ~~Better dark mode/theme toggle~~
 
 * ~~Public profile~~
 

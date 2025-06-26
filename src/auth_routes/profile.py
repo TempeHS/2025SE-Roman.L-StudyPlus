@@ -1,5 +1,5 @@
-from flask import Blueprint, render_template, redirect, url_for, flash, request, make_response
-from flask_login import login_required, logout_user, current_user
+from flask import Blueprint, render_template, redirect, url_for, flash, request
+from flask_login import login_required, current_user
 from src.config import app_log
 import userManagement as dbHandler
 
@@ -52,13 +52,12 @@ def delete_todo(todo_id):
     Delete a to-do from the database
     '''
     user_id = current_user.id
-    todo_id = request.form.get('todo_id')
     try:
         dbHandler.deleteTodo(current_user.id, todo_id)
-        flash("Task is successfully deleted.", "error")
+        flash("Task is successfully deleted.", "success")
         app_log.info("Successful todo deletion: user_id=%s, todo_id=%s", user_id, todo_id)
     except Exception as e:
-        app_log.error("Failed todo deletion attempt user_id=%s, todo_id=%s: %s", 
+        app_log.error("Failed todo deletion attempt user_id=%s, todo_id=%s: %s",
         user_id, todo_id, str(e))
         flash("An error occurred while trying to delete your to-do. Please try again.", "error")
     return redirect(url_for("auth_dashboard.dashboard"))
@@ -73,7 +72,7 @@ def complete_todo(todo_id):
         dbHandler.statusTodo(current_user.id, todo_id)
         flash("Task is successfully completed.", "success")
     except Exception as e:
-        app_log.error("Failed todo completion attempt user_id=%s, todo_id=%s: %s", 
+        app_log.error("Failed todo completion attempt user_id=%s, todo_id=%s: %s",
         current_user.id, todo_id, str(e))
         flash("An error occurred while trying to complete your to-do. Please try again.", "error")
     return redirect(url_for("auth_dashboard.dashboard"))

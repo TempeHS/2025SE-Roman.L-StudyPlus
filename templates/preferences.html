@@ -7,7 +7,7 @@
     </div>
 
     <!-- Layout -->
-    <form method="POST" action="{{ url_for('auth_profile.set_layout') }}">
+    <form method="POST" action="{{ url_for('auth_profile.set_layout') }}" aria-label="Choose layout">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <label for="layout">Choose layout:</label>
         <select name="layout" id="layout" class="form-select">
@@ -18,7 +18,7 @@
     </form>
 
     <!-- Privacy -->
-    <form method="POST" action="{{ url_for('auth_profile.set_theme') }}">
+    <form method="POST" action="{{ url_for('auth_profile.set_theme') }}" aria-label="Choose profile restrictions">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <label for="layout">Choose profile restrictions:</label>
         <select name="privacy" id="layout" class="form-select">
@@ -29,12 +29,12 @@
     </form>
 
     <!-- Searchs -->
-    <form method="POST" action="{{ url_for('auth_profile.profile_search') }}">
+    <form method="POST" action="{{ url_for('auth_profile.profile_search') }}" aria-label="Search user by ID">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <label for="user_id">Search user by ID:</label>
         <input type="number" name="user_id" id="user_id" class="form-select" placeholder="Enter user ID" min="1"
             required>
-        <button type="submit" class="btn btn-primary mt-2">Go to Profile</button>
+        <button type="submit" class="btn btn-primary mt-2">Search</button>
     </form>
 
 </div>

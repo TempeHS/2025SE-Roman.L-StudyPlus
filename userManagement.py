@@ -2,10 +2,10 @@ import sqlite3 as sql
 import time
 import random
 from datetime import datetime, timedelta
-from flask import flash, redirect, url_for, g
+from flask import flash, g
 from flask_login import UserMixin
 from flask import Flask
-    
+
 app = Flask(__name__)
 
 DATABASE = '.databaseFiles/database.db'
@@ -24,6 +24,8 @@ def close_db(exception):
         db.close()
 
 class User(UserMixin):
+    '''
+    User class for Flask-Login integration'''
     def __init__(self, user_id, email, firstname, lastname, layout, privacy):
         self.id = user_id
         self.email = email
@@ -121,6 +123,9 @@ def getTodos(user_id):
     return todos
 
 def mapTodoRows(rows):
+    ''' 
+    Maps database rows to a list of dictionaries for todos.
+    '''
     return [
         {
             "id": row[0],
@@ -134,6 +139,9 @@ def mapTodoRows(rows):
     ]
 
 def statusTodo(user_id, todo_id):
+    """
+    Toggle the status of a todo item between completed and ongoing.
+    """
     db = get_db()
     cur = db.cursor()
     # Get current status
@@ -159,6 +167,9 @@ def deleteTodo(user_id, todo_id):
     db.commit()
 
 def recordStatus(user_id):
+    """
+    Returns the count of completed, ongoing, and overdue tasks for a user.
+    """
     db = get_db()
     cur = db.cursor()
     # Completed
@@ -228,6 +239,9 @@ def countTodosByUser(user_id):
 
 ## Profile
 def get_progression_stats(user_id):
+    """
+    Returns the last 7 days of completed todos for a user.
+    """
     db = get_db()
     cur = db.cursor()
     today = datetime.now().date()

@@ -66,7 +66,10 @@ limiter = Limiter(
 
 # Rate limit exceeded handler
 @app.errorhandler(429)
-def ratelimit_handler(e):
+def ratelimit_handler():
+    ''' 
+    Handle rate limit exceeded errors
+    '''
     flash("Rate limit exceeded. Please try again later.", "error")
     return redirect(url_for('index'))
 
@@ -89,6 +92,9 @@ def load_user(user_id):
 @app.route("/index.php", methods=["GET"])
 @app.route("/index.html", methods=["GET"])
 def root():
+    '''
+    Redirect index.html to root URL
+    '''
     return redirect("/", 302)
 
 @app.route("/", methods=["POST", "GET"])
@@ -121,7 +127,7 @@ def index():
     '''
     return render_template("/index.html")
 
-@app.route("/privacy.html", methods=["GET"])
+@app.route("/privacy", methods=["GET"])
 def privacy():
     '''
     Privacy policy page

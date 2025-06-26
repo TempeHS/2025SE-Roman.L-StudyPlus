@@ -12,26 +12,30 @@
   <div class="row">
     <!-- Form Column -->
     <div class="col-md-6">
-      <form action="{{ url_for('auth_form.form') }}" method="POST" class="box" id="createLog">
+      <form action="{{ url_for('auth_form.form') }}" method="POST" class="box" id="createLog" aria-label="Create a new task">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <div class="col-auto mb-3">
           <label for="titleInput" class="form-label">Header</label>
-          <input name="title" type="text" class="form-control" id="titleInput" required maxlength="64">
+          <input name="title" type="text" class="form-control" id="titleInput" required maxlength="64" aria-required="true" aria-describedby="titleHelp">
+          <div id="titleHelp" class="form-text">Enter a short, descriptive title for your task.</div>
         </div>
         <div class="col-auto mb-3">
           <label for="dueDateInput" class="form-label">Due Date</label>
-          <input name="due_date" type="date" class="form-control" id="dueDateInput">
+          <input name="due_date" type="date" class="form-control" id="dueDateInput" aria-describedby="dueDateHelp">
+          <div id="dueDateHelp" class="form-text">Set a due date for your task.</div>
         </div>
         <div class="col-auto mb-3">
           <label for="labelsInput" class="form-label">Labels</label>
-          <input name="labels" type="labels" class="form-control" id="labelsInput">
+          <input name="labels" type="text" class="form-control" id="labelsInput" aria-describedby="labelsHelp">
+          <div id="labelsHelp" class="form-text">Add labels separated by commas (e.g., work, urgent).</div>
         </div>
         <div class="col-auto mb-3">
           <label for="bodyText" class="form-label">Notes</label>
-          <textarea class="form-control" name="body" id="bodyText"></textarea>
+          <textarea class="form-control" name="body" id="bodyText" aria-describedby="notesHelp"></textarea>
+          <div id="notesHelp" class="form-text">Add any additional details or notes for your task.</div>
         </div>
         <div class="col-auto">
-          <button type="submit" class="btn btn-primary mb-3">Create Log</button>
+          <button type="submit" class="btn btn-primary mb-3" aria-label="Create task">Create Log</button>
         </div>
       </form>
     </div>
