@@ -134,16 +134,6 @@ def privacy():
     '''
     return render_template("/privacy.html")
 
-def is_safe_url(target):
-    '''
-    Check if the target URL is safe to redirect to
-    '''
-    allowed_urls = ['/', '/dashboard', '/index.html']
-    parsed_url = urlparse(target)
-    if parsed_url.netloc == '' and parsed_url.path in allowed_urls:
-        return True
-    return False
-
 # Website blueprint
 app.register_blueprint(auth_signup_bp)
 app.register_blueprint(auth_login_bp)
@@ -179,4 +169,4 @@ context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
 context.load_cert_chain('certs/certificate.pem', 'certs/privatekey.pem')
 
 if __name__ == "__main__":
-    app.run(debug=True, host="127.0.0.1", port=5000, ssl_context=None) # 'context' for HTTPS, SSL
+    app.run(debug=False, host="127.0.0.1", port=5000, ssl_context=None) # 'context' for HTTPS, SSL
