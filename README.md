@@ -80,6 +80,10 @@ I focused on code optimisations and security issues. These methods included JS m
 ### Preferences
 ![Preferences](static/icons/desktop_preferences_screenshot.png)
 
+## Other
+
+Completed Gaant Chart and Systems Report located in working documents.
+
 ## Acknowledgments
 
 Inspiration, code snippets, etc.
